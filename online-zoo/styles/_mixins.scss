@@ -1,0 +1,48 @@
+@mixin font ($size, $height, $weight: 400, $style: normal) {
+    font-size: $size;
+    line-height: $height;
+    font-style: $style;
+    font-weight: $weight;
+}
+
+@mixin flex($justify) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-items: center;     
+}
+
+@mixin flex-column($justify) {
+    display: flex;
+    flex-direction: column;
+    justify-content: ($justify);
+    //align-items: center;
+}
+
+@mixin media-tablet {
+    @media (max-width: 1279px) { @content; }
+}
+  
+@mixin media-mobile {
+    @media (max-width: 767px) { @content; }
+}
+
+@mixin rangeThumb {   
+    width: 40px;
+    height: 40px;
+    margin: -19px -7px  0;
+   border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+   
+    //border: 0 !important;
+   background-image: url('../../../assets/icons/roller_icon.svg');
+    //background-size: 40px 40px;
+}
+  
+@mixin rangeTrack {
+   width: 100%;
+    height: 2px;
+    //cursor: pointer;
+    background: #72828E;
+}
