@@ -896,14 +896,39 @@ input[type=radio] {
   height: 353px;
 }
 
-.footer__socoals {
+.footer__socials {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .footer__logo {
+  cursor: pointer;
+  margin-right: 63px;
+  width: 82px;
+  height: 52px;
+  text-align: center;
+  border: 1px solid #FFF;
+  border-radius: 2px;
+  background-image: url("../../../assets/icons/bamboo.svg");
+  background-repeat: no-repeat;
+  background-position: 15% 83%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin-bottom: 68px;
+}
+
+.footer__logo-link {
+  display: block;
+}
+
+.footer__logo-title {
+  font-size: 19.0145px;
+  line-height: 23px;
+  font-style: normal;
+  font-weight: 400;
+  color: #FFF;
 }
 
 .link-button {
