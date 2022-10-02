@@ -16,33 +16,32 @@
     display: flex;
     flex-direction: column;
     justify-content: ($justify);
-    //align-items: center;
+}
+
+@mixin media-small-desktop {
+    @media (max-width: 1599px) { @content; }
 }
 
 @mixin media-tablet {
-    @media (max-width: 1279px) { @content; }
+    @media (max-width: 999px) { @content; }
 }
   
 @mixin media-mobile {
-    @media (max-width: 767px) { @content; }
+    @media (max-width: 639px) { @content; }
 }
 
 @mixin rangeThumb {   
     width: 40px;
     height: 40px;
     margin: -19px -7px  0;
-   border-radius: 50%;
+    border-radius: 50%;
     background: transparent;
     cursor: pointer;
-   
-    //border: 0 !important;
-   background-image: url('../../../assets/icons/roller_icon.svg');
-    //background-size: 40px 40px;
+    background-image: url('../../../assets/icons/roller_icon.svg');    
 }
   
 @mixin rangeTrack {
-   width: 100%;
-    height: 2px;
-    //cursor: pointer;
+    width: 100%;
+    height: 2px;    
     background: #72828E;
 }
