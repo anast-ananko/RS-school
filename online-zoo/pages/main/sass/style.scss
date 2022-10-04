@@ -34,15 +34,16 @@ h3 {
     overflow: hidden;
 
     @include media-small-desktop {
-        max-width: 1000px;
+        max-width: calc(100vw - 60px);
     }  
 
     @include media-tablet {
-        max-width: 640px;
+        max-width: calc(100vw - 40px);
     }  
 
     @include media-mobile {
-        max-width: 320px;
+        max-width: calc(100vw - 20px);
+        //overflow: visible;
     }
 }
 
@@ -51,27 +52,31 @@ h3 {
     margin: 0 auto; 
 
     @include media-small-desktop {
-        max-width: 940px;
+        max-width: 100vw;
     }  
 
     @include media-tablet {
-        max-width: 600px;
+        max-width: 100vw;
     }  
 
     @include media-mobile {
-        max-width: 300px;
-    }
+        max-width: 100vw;}
 }
+
+
 
 
 /*     Header start    */
 
 .header {
     background-color: $color-black;  
-
-    @include media-small-desktop {
-        background-color: #111115;
-    }    
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    
+    @include media-tablet {
+      position: fixed;    
+    }     
 }
 
 .header__container {
@@ -79,10 +84,22 @@ h3 {
     height: 80px;    
     color: $color-white;
     border-bottom: none;
+    margin: 0 auto;
+    width: 1160px;
+
+    @include media-small-desktop {
+        width: calc(100vw - 60px);
+    }  
 
     @include media-tablet {
         justify-content: space-between;
-        height: 34px;  
+        height: 34px; 
+        width: calc(100% - 40px);      
+        margin: 0 auto;
+    }
+
+    @include media-mobile{
+        width: calc(100vw - 20px); 
     }
 } 
 
@@ -303,7 +320,7 @@ h3 {
     @include media-tablet {
         display: block;
         z-index: 5;
-       // margin-right: 20px;
+       //margin-right: 20px;
     }
 
     &:before {
@@ -333,66 +350,77 @@ h3 {
 
 .panda {
     background-color: $color-black;
-    @include media-small-desktop {
-        background-color: #111115;
-    }   
-    
-    @include media-mobile {
-        .wrapper {
-            overflow: visible;
-        }
-    }
-}
-
-.panda__container {    
     background-image: url('../../../assets/images/panda.jpg');
-    background-position: center -80px;
+    background-position: center center;
+    background-size: cover;
     background-repeat: no-repeat;
-    height: 700px;
+    height: 780px;
     position: relative;
+    overflow: hidden;
 
     @include media-small-desktop {
         background-image: url('../../../assets/images/panda-sd.jpg');
-        height: 504px;
+       height: 584px;
     } 
 
     @include media-tablet {
         background-image: url('../../../assets/images/panda-tablet.jpg');
-        background-position: center -34px;
-        height: 339px;
-    }
-
+        height: 374px;
+    }   
+    
     @include media-mobile {
         background-image: url('../../../assets/images/panda-mobile.jpg');
-        background-position: center 0px;
-        height: 187px;
-    }
+        height: 221px;  
+        overflow: visible;            
 
+        // .wrapper {
+        //     overflow: visible;
+        // }
+    }
+}
+
+.panda__container {    
+    height: 780px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+ 
+
+    @include media-mobile {
+        overflow: visible;
+        height: 600px;
+    }
 }
 
 .panda__ellipse {
-    margin-top: 12px;
-    margin-left: 587px;
+    width: 465px;
+    height: 465px;
+    margin-top: 92px;  
+    margin-right: 330px;
 
     @include media-small-desktop {
         width: 367px;
         height: 367px;
-        margin-top: -12px;
-        margin-left: 425px;
+        margin-top: 70px;
+        margin-right: 145px;      
     } 
 
     @include media-tablet {
         width: 237.6px;
         height: 237.6px;
-        margin-top: 10px;
-        margin-left: 310px;
+        margin-top: 45px;
+        margin-right: 50px;
     }
 
     @include media-mobile {
         width: 119.09px;
         height: 119.09px;
-        margin-top: 22px;
-        margin-left: 152px;
+        margin-top: 56px;
+        margin-right: 28px;
     }
 }
 
@@ -404,28 +432,28 @@ h3 {
     width: 500px;
     text-align: center;
     right: 220px;
-    top: 85px;
+    top: 165px;
     z-index: 1;    
 
     @include media-small-desktop {
         @include font(85px, 64px, 700);
         width: 400px;
-        right: 85.75px;
-        top: 41px;
+        right: 55px;
+        top: 120px;
     } 
 
     @include media-tablet {
         @include font(54.2894px, 41px, 700);
         width: 256px;
-        right: 15px;
-        top: 47px;
+        right: -5px;
+        top: 82px;
     }
 
     @include media-mobile {
         @include font(28px, 21px, 700);
         width: 128px;
-        right: 10px;
-        top: 41px;
+        right: 0;
+        top: 75px;
     }
 }
 
@@ -455,24 +483,26 @@ h3 {
 }
 
 .panda__button {
-    margin-top: 63px;
-    margin-left: 763px;
+    margin-top: 70px;
+    margin-right: 320px;
+    padding-left: 10px;
 
     @include media-small-desktop {
-        margin-top: 41px;
-        margin-left: 535px;
+        padding-left: 10px;
+        margin-top: 45px;
+        margin-right: 110px;
     }  
 
     @include media-tablet {
-        margin-top: -10px;
-        margin-left: 0; 
+        margin-top: -5px;
+        margin-right: 300px; 
     }
 
     @include media-mobile {
         position: absolute;
         z-index: 30;
-        bottom: -75px;
-        left: 10px;
+        bottom: 305px;
+        left: 0;
         padding-left: 10px;       
     }
 }
@@ -482,18 +512,28 @@ h3 {
 
 /*     Backstage start   */
 
+.backstage {
+    position: relative;
+    overflow: hidden;
+
+   
+}
+
 .backstage__content {
     @include flex(space-between);
     margin-top: 140px;   
     margin-bottom: 87px;
     
     @include media-small-desktop {
-        margin-top: 100px;   
+        margin-top: 100px; 
+        @include flex(center);  
+        flex-wrap: nowrap;
     }
 
     @include media-tablet {
         margin-top: 60px; 
-        margin-bottom: 25px;  
+        margin-bottom: 25px; 
+        justify-content: flex-start; 
        
     }
 
@@ -508,9 +548,11 @@ h3 {
     height: 403px;
 
     @include media-small-desktop {
-        max-width: 455px;
+        max-width: 609px;
+        min-width: 455px;
         height: 408px;       
         object-fit: cover;   
+        margin-right: 30px;
     }  
 
     @include media-tablet {
@@ -524,11 +566,19 @@ h3 {
     align-items: flex-start;
     
     @include media-small-desktop {
-        max-width: 454px;
+        min-width: 454px;
+        max-width: calc(100vw - 550px);
     }
 
     @include media-tablet {
-        max-width: 495px;
+        min-width: 495px;
+       // width: calc(100vw - 150px);
+    }
+
+
+    @include media-mobile {
+        min-width: 297px;
+       // width: calc(100vw - 150px);
     }
 }
 
@@ -581,6 +631,7 @@ h3 {
     position: absolute;
     top: 10px;
     right: -3px;
+    z-index: 3;
 
     @include media-small-desktop {
         display: none;
@@ -589,8 +640,9 @@ h3 {
     @include media-tablet {
         display: block;
         width: 160px;
-        top: -5px;
+        top: -7px;
         right: -30px;
+        
     }
 
     @include media-mobile {
@@ -604,6 +656,23 @@ h3 {
 
 
 /*     Pets start    */
+
+.pets {
+    position: relative;
+    overflow: hidden;
+    .wrapper {
+        @include media-small-desktop {
+            max-width: calc(100vw - 50px);
+        } 
+        @include media-tablet {
+            max-width: calc(100vw - 40px);
+        } 
+        @include media-mobile {
+            max-width: calc(100vw - 20px);
+        } 
+    } 
+   
+}
 
 .pets__container {
     margin-top: 92px;
@@ -650,10 +719,11 @@ h3 {
     }
 
     @include media-tablet {
-        max-width: 600px;
+        max-width: 640px;
     }
 
     @include media-mobile {
+     //   min-width: 290px;
         gap: 21px;
     }    
 }
@@ -827,12 +897,12 @@ h3 {
 
     @include media-small-desktop {
         top: 370px;
-        left: 350px;
+        left: 325px;
     }
 
     @include media-tablet {
         top: 345px;
-        left: 245px;
+        left: 225px;
     }
 }
     
@@ -844,12 +914,12 @@ h3 {
 
     @include media-small-desktop {
         top: 370px;
-        right: 350px;        
+        right: 325px;        
     }
 
     @include media-tablet {
         top: 345px;
-        right: 245px;
+        right: 225px;
     }
 }
 
@@ -875,7 +945,7 @@ h3 {
     
     @include media-small-desktop {
         height: 202px;
-        left: -185px;
+        left: -190px;
     }
 
     @include media-tablet {
@@ -916,6 +986,19 @@ h3 {
 
 /*     Pick start    */
 
+.pick {
+    .container {
+        width: calc(100vw - 60px);
+        @include media-tablet {
+            width: 100vw;
+        }
+        
+    }
+    overflow: hidden;
+
+
+}
+
 .pick__container {
     background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #FEBDAB 100.95%, rgba(254, 210, 144, 0.7) 106.36%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #E0D8F0 80.49%, #EAF7FE 127.9%, #EAF7FE 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #E0D8F0 80.49%, #EAF7FE 127.9%, #EAF7FE 149.54%);
     padding-top: 69px;
@@ -930,9 +1013,7 @@ h3 {
         padding-top: 20px;        
         padding-bottom: 20px;
 
-        .container {
-            max-width: 640px;           
-        }
+        
     }
 
     @include media-mobile {
@@ -1087,6 +1168,14 @@ h3 {
     background: $color-green;
 }
 
+.pick__help {
+    @include media-tablet {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 .pick__help-title {
     color: $color-black-blue;
     text-align: center;
@@ -1107,13 +1196,15 @@ h3 {
     }
 
     @include media-tablet {
-        margin: 20px 32px 40px 20px;    
+        margin: 20px 0 40px 0;    
+        width: 599px;
     }
 
     @include media-mobile {
         flex-direction: column;
-        margin: 20px 66px 0 66px; 
-        justify-content: flex-start;      
+        margin: 20px 0 0 0; 
+        justify-content: flex-start;   
+        width: 170px;   
     }
 
 }
@@ -1237,6 +1328,11 @@ h3 {
 
 /*     Testimonials start    */
 
+.testimonials {
+    position: relative;
+    overflow: hidden;
+}
+
 .testimonials__container {
     position: relative;
     padding: 140px 220px 180px 220px;
@@ -1259,6 +1355,7 @@ h3 {
 
 .testimonials__content {
     width: 1160px;   
+    margin: 0 auto;
     
     @include media-small-desktop {
         width: 940px;   
@@ -1482,6 +1579,7 @@ h3 {
 }
 
 .testimonials__button {
+   /// margin-left: 100px;
     border-radius: 5px;
 
     @include media-tablet {
@@ -1553,15 +1651,17 @@ h3 {
     height: 353px;    
 
     @include media-small-desktop {
-        max-width: 940px;
-        margin-right: 25px;
-        margin-left: 30px;
+        max-width: calc(100vw - 60px);
+
+       // margin-right: 25px;
+        //margin-left: 30px;
     }  
 
     @include media-tablet {
         margin-right: 0;
-        margin-left: 20px;
+        margin-left: 0;
         height: 257px; 
+        max-width: calc(100vw - 10px);
     }
 
     @include media-mobile {
@@ -1582,6 +1682,7 @@ h3 {
         .footer__form {
             display: none;
         }
+        margin-right: 0;
     }
 
     @include media-mobile {
@@ -1669,12 +1770,12 @@ h3 {
 .footer__contacts {
     @include media-tablet {
         position: absolute;
-        right: 10px;
+        right: -10px;
         top: 0;
     }
 
     @include media-mobile {
-        right: 32px;
+        right: 25px;
         top: 52px;
     }
 }
@@ -1904,7 +2005,7 @@ h3 {
     }
 
     @include media-mobile {
-        margin-right: 10px;
+        margin-right: 0;
     }
 }
 

@@ -30,17 +30,17 @@ h3 {
     overflow: hidden;
 
     @include media-small-desktop {
-        max-width: 1000px;
+        max-width: calc(100vw - 60px);
     }  
 
     @include media-tablet {
-        max-width: 640px;
+        max-width: calc(100vw - 40px);
     }  
 
     @include media-mobile {
-        max-width: 320px; 
+        max-width: calc(100vw - 20px);
+        //overflow: visible;
     }
-
 }
 
 .container {
@@ -48,16 +48,15 @@ h3 {
     margin: 0 auto; 
 
     @include media-small-desktop {
-        max-width: 940px;
+        max-width: 100vw;
     }  
 
     @include media-tablet {
-        max-width: 600px;
+        max-width: 100vw;
     }  
 
     @include media-mobile {
-        max-width: 300px;
-    }
+        max-width: 100vw;}
 }
 
 
@@ -65,10 +64,13 @@ h3 {
 
 .header {
     background-color: $color-black;  
-
-    @include media-small-desktop {
-        background-color: #111115;
-    }    
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    
+    @include media-tablet {
+      position: fixed;    
+    }     
 }
 
 .header__container {
@@ -76,10 +78,22 @@ h3 {
     height: 80px;    
     color: $color-white;
     border-bottom: none;
+    margin: 0 auto;
+    width: 1160px;
+
+    @include media-small-desktop {
+        width: calc(100vw - 60px);
+    }  
 
     @include media-tablet {
         justify-content: space-between;
-        height: 34px;       
+        height: 34px; 
+        width: calc(100% - 40px);      
+        margin: 0 auto;
+    }
+
+    @include media-mobile{
+        width: calc(100vw - 20px); 
     }
 } 
 
@@ -352,29 +366,31 @@ h3 {
 
 .panda {
     background-color: $color-black;
-}
-
-.panda__container {    
     background-image: url('../../../assets/images/panda_donate.jpg');
-    background-position: center;
+    background-position: center center;
+    background-size: cover;
     background-repeat: no-repeat;
-    height: 387px;
+   
+    height: 467px;
     position: relative;
-
     @include media-small-desktop {
         background-image: url('../../../assets/images/panda_donate-sd.jpg');
-        height: 390px;
+        height: 467px;
     }
 
     @include media-tablet {
         background-image: url('../../../assets/images/panda_donate-tablet.jpg');
-        height: 335px;
+        height: 369px;
     }
 
     @include media-mobile {
         background-image: url('../../../assets/images/panda_donate-mobile.jpg');
-        height: 187px;
+        height: 221px;
     }
+}
+
+.panda__container {    
+    position: relative;    
 }
 
 /*     Panda end    */
@@ -400,10 +416,30 @@ h3 {
     @include media-mobile {     
         padding-bottom: 20px; 
     }
+
+    .container {
+        width: calc(100vw - 60px);
+        @include media-tablet {
+            width: 100vw;
+        }
+        
+    }
+    overflow: hidden;
 }
 
 .pick__main {
     color: $color-white;
+    @include media-tablet {
+        width: calc(100vw - 40px);
+        margin: 0 auto;
+    }
+
+    @include media-tablet {
+        width: calc(100vw - 20px);
+       
+    }
+
+    
 }
 
 .pick__main-title {      
@@ -412,13 +448,19 @@ h3 {
 
     @include media-small-desktop {
         text-align: left;
-        max-width: 778px;
+        max-width: 1278px;
         margin-bottom: 30px;
+        margin-right: 100px;
     }
 
     @include media-tablet {
         @include font(24px, 29px);
         margin-bottom: 20px;
+        margin-right: 20px;
+    }
+
+    @include media-tablet {
+        margin-right: 0;
     }
 }
 
@@ -463,11 +505,15 @@ h3 {
     @include media-tablet {
         padding-top: 30px;       
         padding-bottom: 29px;
+        width: calc(100vw - 40px);
+        margin: 0 auto;
     }
 
     @include media-mobile {
         padding-top: 20px;       
         padding-bottom: 20px;
+        width: calc(100vw - 18px);
+        margin: 0 auto;
     }
 }
 
@@ -543,7 +589,7 @@ h3 {
     }
 
     @include media-mobile {
-        width: 300px; 
+        max-width: 300px; 
         padding-right: 0;   
     }
 
@@ -1132,14 +1178,14 @@ input[type=radio] {
     height: 353px;    
 
     @include media-small-desktop {
-        max-width: 940px;
-        margin: 0 auto;
+        max-width: calc(100vw - 60px);
     }  
 
     @include media-tablet {
         margin-right: 0;
-        margin-left: 20px;
+        margin-left: 0;
         height: 257px; 
+        max-width: calc(100vw - 10px);
     }
     @include media-mobile {
         margin-left: 0;
@@ -1246,12 +1292,12 @@ input[type=radio] {
 .footer__contacts {
     @include media-tablet {
         position: absolute;
-        right: 10px;
+        right: -10px;
         top: 0;
     }
 
     @include media-mobile {
-        right: 32px;
+        right: 25px;
         top: 52px;
     }
 }
@@ -1480,7 +1526,7 @@ input[type=radio] {
     }
 
     @include media-mobile {
-        margin-right: 10px;
+        margin-right: 0;
     }
 }
 
