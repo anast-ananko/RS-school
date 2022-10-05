@@ -435,11 +435,14 @@ h3 {
     }
 
     @include media-tablet {
-        width: calc(100vw - 20px);
+        width: calc(100vw - 40px);
        
     }
 
-    
+    @include media-mobile {
+        width: calc(100vw - 20px);
+       
+    }    
 }
 
 .pick__main-title {      
@@ -1522,7 +1525,7 @@ input[type=radio] {
     
     @include media-tablet {
         margin-left: 0;
-        margin-right: 20px;
+        margin-right: 0;
     }
 
     @include media-mobile {

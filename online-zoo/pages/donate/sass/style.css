@@ -841,6 +841,11 @@ h3 {
 }
 @media (max-width: 999px) {
   .pick__main {
+    width: calc(100vw - 40px);
+  }
+}
+@media (max-width: 639px) {
+  .pick__main {
     width: calc(100vw - 20px);
   }
 }
@@ -2072,7 +2077,7 @@ input[type=radio] {
 @media (max-width: 999px) {
   .footer__designer {
     margin-left: 0;
-    margin-right: 20px;
+    margin-right: 0;
   }
 }
 @media (max-width: 639px) {

@@ -1197,7 +1197,8 @@ h3 {
 
     @include media-tablet {
         margin: 20px 0 40px 0;    
-        width: 599px;
+        width: 590px;
+       margin-right: 10px;
     }
 
     @include media-mobile {
@@ -2001,7 +2002,7 @@ h3 {
     
     @include media-tablet {
         margin-left: 0;
-        margin-right: 20px;
+        margin-right: 0;
     }
 
     @include media-mobile {
