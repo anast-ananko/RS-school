@@ -10,61 +10,62 @@
 </head>
 <body>
     <header class="header" id="header">
-       
-            <div class="header__container">
+        <div class="header__container">
 
-                <div class="header__logo">
-                    <a href="../main/index.html" class="header__logo-link">
-                        <h1 class="header__logo-title">
-                            PetStory online
-                        </h1>
-                    </a>    
+            <div class="header__logo">
+                <a href="../main/index.html" class="header__logo-link">
+                    <h1 class="header__logo-title">
+                        PetStory online
+                    </h1>
+                </a>    
+            </div>
+
+            <nav class="header__nav">
+                <div class="header__logo-menu">
+                    <p class="header__logo-menu-title">
+                        PetStory online
+                    </p>
                 </div>
 
-                <nav class="header__nav">
-                    <div class="header__logo-menu">
-                        <p class="header__logo-menu-title">
-                            PetStory online
-                        </p>
-                    </div>
+                <ul class="header__list">
+                    <li class="header__item">
+                        <a href="../../pages/main/index.html" class="header__link">About</a>
+                    </li>
+                    <li class="header__item">
+                        <a href="#no_scroll" class="header__link">Map</a>
+                    </li>
+                    <li class="header__item">
+                        <a href="#no_scroll" class="header__link">Zoos</a>
+                    </li>
+                    <li class="header__item header__item_active">
+                        <a href="../../pages/donate/index.html" class="header__link">Donate</a>
+                    </li>
+                    <li class="header__item">
+                        <a href="#no_scroll" class="header__link">Contact us</a>
+                    </li>
+                    <li class="header__designer-menu">
+                        <a href="#no_scroll" class="header__link">Designed by ©</a>
+                    </li>
+                </ul>
 
-                    <ul class="header__list">
-                        <li class="header__item">
-                            <a href="../../pages/main/index.html" class="header__link">About</a>
-                        </li>
-                        <li class="header__item">
-                            <a href="#no_scroll" class="header__link">Map</a>
-                        </li>
-                        <li class="header__item">
-                            <a href="#no_scroll" class="header__link">Zoos</a>
-                        </li>
-                        <li class="header__item header__item_active">
-                            <a href="../../pages/donate/index.html" class="header__link">Donate</a>
-                        </li>
-                        <li class="header__item">
-                            <a href="#no_scroll" class="header__link">Contact us</a>
-                        </li>
-                        <li class="header__designer-menu">
-                            <a href="#no_scroll" class="header__link">Designed by ©</a>
-                        </li>
-                    </ul>
+            </nav>
 
-                </nav>
+            <div class="header__designer">
+                <a href="https://www.figma.com/file/4bx41cR0nTIY9SKtd5uDBE/online-zoo-3-weeks-(Copy)?node-id=126%3A0" class="header__link">Designed by ©</a>
+            </div>                
 
-                <div class="header__designer">
-                    <a href="https://www.figma.com/file/4bx41cR0nTIY9SKtd5uDBE/online-zoo-3-weeks-(Copy)?node-id=126%3A0" class="header__link">Designed by ©</a>
-                </div>                
-
-                <div class="header__burger">
-                    <span class="burger__line"></span>
-                </div>
-
-            
-        </div>
+            <div class="header__burger">
+                <span class="burger__line burger__line_first"></span>
+                <span class="burger__line burger__line_second"></span>
+                <span class="burger__line burger__line_third"></span>
+            </div>
+        
+        </div>            
     </header>
 
 
     <main>
+
         <section class="panda">
             <div class="wrapper">                
                 <div class="panda__container">                        
@@ -125,46 +126,46 @@
                                 Amount
                             </p>
                             <div class="pick__widget-amounts">
-                                <button class="amount amount-1"></button>
-                                <button class="amount amount-2"></button>
-                                <button class="amount amount-3 amount_active"></button>
-                                <button class="amount amount-4"></button>
-                                <button class="amount amount-5"></button>
-                                <button class="amount amount-6"></button>
-                                <button class="amount amount-7"></button>
-                                <button class="amount amount-8"></button>                               
+                                <button class="amount" data-amount="5000"></button>
+                                <button class="amount" data-amount="2000"></button>
+                                <button class="amount" data-amount="1000"></button>
+                                <button class="amount" data-amount="500"></button>
+                                <button class="amount" data-amount="250"></button>
+                                <button class="amount amount_active" data-amount="100"></button>
+                                <button class="amount" data-amount="50"></button>
+                                <button class="amount" data-amount="25"></button>                               
                             </div>
 
-                            <div class="pick__widget-dollars">
+                            <div class="pick__widget-dollars" data-amount="5000">
                                 <div class="pick__widget-dollar">
                                     <span class="dollar">$</span>
                                     <span>5000</span> 
                                 </div>
-                                <div class="pick__widget-dollar">
+                                <div class="pick__widget-dollar" data-amount="2000">
                                     <span class="dollar">$</span>
                                     <span>2000</span> 
                                 </div>
-                                <div class="pick__widget-dollar pick__widget-dollar_active">
+                                <div class="pick__widget-dollar" data-amount="1000">
                                     <span class="dollar">$</span>
                                     <span>1000</span> 
                                 </div>
-                                <div class="pick__widget-dollar">
+                                <div class="pick__widget-dollar" data-amount="500">
                                     <span class="dollar">$</span>
                                     <span>500</span> 
                                 </div>
-                                <div class="pick__widget-dollar">
+                                <div class="pick__widget-dollar" data-amount="250">
                                     <span class="dollar">$</span>
                                     <span>250</span> 
                                 </div>
-                                <div class="pick__widget-dollar">
+                                <div class="pick__widget-dollar pick__widget-dollar_active" data-amount="100">
                                     <span class="dollar">$</span>
                                     <span>100</span> 
                                 </div>
-                                <div class="pick__widget-dollar">
+                                <div class="pick__widget-dollar" data-amount="50">
                                     <span class="dollar">$</span>
                                     <span>50</span> 
                                 </div>
-                                <div class="pick__widget-dollar">
+                                <div class="pick__widget-dollar" data-amount="25">
                                     <span class="dollar">$</span>
                                     <span>25</span> 
                                 </div>                                
@@ -172,7 +173,7 @@
                         </div>                    
                         
                         <div class="input-number">
-                            <input type="number" max="9999" placeholder="Another amount">
+                            <input type="number" max="9999" placeholder="Another amount" value="100">
                         </div>
 
                         <div class="input-radio">
@@ -281,10 +282,11 @@
                     </div>    
                   
                 </div>
+
             </div>    
-        </div>
-        
+        </div>        
     </footer>
+    
     <script type="module" src="index.js"></script> 
 </body>
 

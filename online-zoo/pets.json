@@ -1,0 +1,59 @@
+
+[
+    {
+      "id": 1,
+      "name": "Giant pandas",
+      "img": "../../assets/images/pandas.jpg",
+      "country": "Native to Southwest China",     
+      "food": "../../assets/icons/banana-bamboo_icon.svg",
+      "classFood": "icon-banana" 
+    },   
+    {
+      "id": 2,
+      "name": "Eagles",
+      "img": "../../assets/images/eagles.jpg",
+      "country": "Native to South America",      
+      "food": "../../assets/icons/meet-fish_icon.svg",
+      "classFood": "icon-fish"  
+    },
+    {
+      "id": 3,
+      "name": "Gorillas",
+      "img": "../../assets/images/gorillas.jpg",
+      "country": "Native to Congo",      
+      "food": "../../assets/icons/banana-bamboo_icon.svg" ,
+      "classFood": "icon-banana" 
+    },
+    {
+      "id": 4,
+      "name": "Two-toed Sloth",
+      "img": "../../assets/images/sloth.jpg",
+      "country": "Mesoamerica, South America",      
+      "food": "../../assets/icons/banana-bamboo_icon.svg",
+      "classFood": "icon-banana"  
+    },
+    {
+      "id": 5,
+      "name": "Cheetahs",
+      "img": "../../assets/images/cheetahs.jpg",
+      "country": "Native to Africa",      
+      "food": "../../assets/icons/meet-fish_icon.svg",
+      "classFood": "icon-fish" 
+    },
+    {
+      "id": 6,
+      "name": "Penguins",
+      "img": "../../assets/images/penguins.jpg",
+      "country": "Native to Antarctica",     
+      "food": "../../assets/icons/meet-fish_icon.svg",
+      "classFood": "icon-fish"  
+    },
+    {
+      "id": 7,
+      "name": "Alligators",
+      "img": "../../assets/images/alligators.jpg",
+      "country": "Native to Southeastern U. S.",     
+      "food": "../../assets/icons/meet-fish_icon.svg",
+      "classFood": "icon-fish"  
+    }
+]
