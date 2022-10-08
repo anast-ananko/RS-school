@@ -9,6 +9,9 @@ window.addEventListener('DOMContentLoaded', function() {
     inputHandler();
 });
 
+
+// burger 
+
 const MENU = document.querySelector('.header__nav');
 const BURGER =  document.querySelector('.header__burger');
 const BODY = document.querySelector('body');
@@ -44,6 +47,7 @@ const openMenuHandler = () => {
 
 
 // amounts
+
 const btns = document.querySelectorAll('.amount');
 const dollars = document.querySelectorAll('.pick__widget-dollar');
 let actualAmount = document.querySelector('.input-number > input');

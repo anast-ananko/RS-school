@@ -3,29 +3,23 @@ import jsonObject from "../../pets.json" assert { type: "json" };
 import data from "../../reviews.json" assert { type: "json" };
 
 window.addEventListener('DOMContentLoaded', function() {
+    //burger
     burgerMenuHandler(); 
     openMenuHandler();
     stopBurgerPropagation();   
 
     //slider
-
-    //generateArrayRandomNumber(jsonObject);
     firstGenerateCards(jsonObject);
     slider(jsonObject);  
 
     //reviews
     initialReviews(data);
     rangeHandler();
-   // console.log(data);
 
    //modal
-   if (document.documentElement.clientWidth < 1000) {
-        //console.log(document.documentElement.clientWidth )
+    if (document.documentElement.clientWidth < 1000) {
         openModal();
-   }
-   
-
-
+    }
 });
 
 //burger
@@ -69,8 +63,6 @@ const openMenuHandler = () => {
 let centerCards = document.querySelector('.pets__cards-active');
 let leftCards = document.querySelector('.pets__cards-left');
 let rightCards = document.querySelector('.pets__cards-right');
-//let activeCenterCards = document.querySelectorAll('.pets__cards-active >.pets__card');
-
 
 // класс для создания карточки животного
 class Card {
@@ -111,27 +103,20 @@ class Card {
 const generateArrayRandomNumber = (data) => {
     let widthContent = document.documentElement.clientWidth;
     let number;
+    let arrayRandomNumbers = [];
+
     if (widthContent >= 640) {
         number = 6;
-    } else number = 4;
-
-    let arrayRandomNumbers = [];
-    //let activeNumbers = [];
-    //let activeCards = active;
-
-    // for (let i = 0; i < activeCards.length; i++) {
-    //     activeNumbers.push(Number(activeCards[i].dataset.id) - 1);
-    // }
-    
+    } else number = 4; 
+       
     do {   
         let randomNumber = Math.floor(Math.random() * data.length);
-        //if (!activeNumbers.includes(randomNumber)) {
-            if (!arrayRandomNumbers.includes(randomNumber)) {
-                arrayRandomNumbers.push(randomNumber);
-            }
-       // }
+
+        if (!arrayRandomNumbers.includes(randomNumber)) {
+            arrayRandomNumbers.push(randomNumber);
+        } 
     } while (arrayRandomNumbers.length < number);
-    //console.log(arrayRandomNumbers)
+    
     return arrayRandomNumbers;
 }
 
@@ -143,7 +128,7 @@ const generateCards = (data) => {
     for (let i = 0; i < arrayRandomNumbers.length; i++) {
         cards.push(new Card(data[arrayRandomNumbers[i]]));
     }
-  // console.log(cards)
+
     return cards; 
 }
 
@@ -160,11 +145,7 @@ const renderDivsToDom = (data, part) => {
 
     generateCards(data).forEach(card => {
         cardsWrapper.append(card.generateCard());
-    })
-
-    // if (generationCenterCards) {
-    //     activeCenterCards = document.querySelectorAll('.pets__cards-active >.pets__card');
-    // }
+    });
 }
 
 const BTN_LEFT = document.querySelector(".arrow-left");
@@ -225,8 +206,6 @@ const slider = (data) => {
 }
 
 
-
-
 // slider reviews
 
 const elem = document.querySelector('.progress');
@@ -272,8 +251,8 @@ class Review {
         return card;
     }
 }
-// генерация отзывов
 
+// генерация отзывов
 const generateReviews = (data) => { 
     let cards = [];
     let widthContent = document.documentElement.clientWidth;
@@ -284,7 +263,7 @@ const generateReviews = (data) => {
     } else {
         number = 3;
     }
-    console.log(number)
+
     for (let i = 0; i < number; i++) {
         cards.push(new Review(data[i]));
     }
@@ -292,15 +271,12 @@ const generateReviews = (data) => {
     return cards; 
 }
 
-const renderRiviewsToDom = (data) => {
-   
+const renderRiviewsToDom = (data) => {   
     reviews.innerHTML = '';
 
     generateReviews(data).forEach(l => {
         reviews.append(l.generateCard());
-    })
-    console.log(reviews)
-
+    });
 }
 
 
@@ -311,44 +287,34 @@ const initialReviews = (data) => {
         elem.max = 8;
     }
 
-    //console.log(data);
-    //reviews.innerHTML = '';
     renderRiviewsToDom(data);
 }
 
 const rangeValue = () => { 
     console.log(elem.max);
     let newValue = elem.value;
-   //console.log(newValue)
-   // let target = document.querySelector('.value');
-    //target.innerHTML = newValue;
-    shiftReviews(newValue);    
-    
+    shiftReviews(newValue);        
 }
 
 const shiftReviews = (shift) => {
     let r = shift * 296;
-   // let t = `${r}px`;
-   // console.log(t);
-   
-   console.log(elem.max);
+
     if(elem.max == 7) {
         r = shift * 296;
     } else {
         r = shift * 321;
     }
    
-    reviews.style.transform = `translateX(-${r}px)`;
-    
+    reviews.style.transform = `translateX(-${r}px)`;    
 };
 
 const rangeHandler = () => {
     elem.addEventListener("input", rangeValue);
-
 }
 
 
 // modal
+
 class Modal {
     constructor ({ id, name, country, data, img, text }) {
         this.id = id;
@@ -450,8 +416,7 @@ class Modal {
 
     closeModalByButton() {        
         document.querySelector('.overlay').remove();
-        BODY.classList.remove('no-scroll');  
-        
+        BODY.classList.remove('no-scroll');          
     }
 }
 
@@ -471,5 +436,5 @@ const openModal = () => {
             let clickedData = getClickedData(id);        
             renderModalWindow(clickedData);
         }
-    })
+    });
 }
