@@ -2,7 +2,6 @@
 @import "../../../styles/fonts";
 @import "../../../styles/constants";
 @import "../../../styles/mixins";
-@import "../../../styles/placeholders";
 
 html {
     box-sizing: border-box;
@@ -23,6 +22,12 @@ h3 {
     @include font(36px, 47px);
 }
 
+.overflow-hidden {
+    @include media-tablet{
+        overflow-y: hidden;
+    }  
+}
+
 .wrapper {
     max-width: 1600px;
     margin: 0 auto;
@@ -39,7 +44,6 @@ h3 {
 
     @include media-mobile {
         max-width: calc(100vw - 20px);
-        //overflow: visible;
     }
 }
 
@@ -56,7 +60,8 @@ h3 {
     }  
 
     @include media-mobile {
-        max-width: 100vw;}
+        max-width: 100vw;
+    }
 }
 
 
@@ -149,8 +154,8 @@ h3 {
     @include media-tablet {
         align-content: start;
         position: fixed;
-        max-width: 320px;
-        height: 100%;
+        width: 640px;
+        height: 247px;
         top: 0;
         right: 0;
         background-color: $color-white;
@@ -163,7 +168,11 @@ h3 {
             @include font(16px, 22px);
             color: $color-black-blue;
         }
+    }
 
+    @include media-mobile {
+        width: 320px;
+        z-index: 30;
     }
 }
 
@@ -257,57 +266,52 @@ h3 {
         transform: translateX(0);
         box-shadow: 0 0 0 1000px rgba(41, 41, 41, 0.6);
         ~ .header__burger {
-          //  transform: rotate(90deg);
-            //left: calc(100% - 73px);
-            left: 0;
-            top: 0;
-            //background-color: $color-black;
-
+            display: block;
+            z-index: 35;
+           
             .burger__line {
                 background-color: $color-black;
-            }
+                width: 20px;
 
-            &:before {
-                content: "";
-                display: block;
-                position: absolute;
-                background-color: $color-black;
-                width: 100%;
-                height: 2px;
-                border-radius: 2px;
-                top: 0;
-                left: 0;
-            }
-
-            &:after{
-                content: "";
-                display: block;
-                position: absolute;
-                background-color: $color-black;
-                width: 100%;
-                height: 2px;
-                border-radius: 2px;
-                bottom: 0;
-                left: 0;
+                &_first {
+                    transform: translateY(13px) rotate(45deg);
+                    bottom: 26px;
+                }
+            
+                &_second {
+                    opacity: 0;
+                }
+            
+                &_third {
+                    transform: translateY(-13px) rotate(-45deg);
+                    top: 26px;
+                }
             }
         }    
 
         .header__logo-menu {
-            width: 65.6px;
-            height: 41.6px;
+            width: 64px;
+            height: 40px;
             display: block;
             z-index: 100;
             position: absolute;
-            right: 240px;
-            top: 10px;
-           // animation: showBlock 1s linear forwards;
+            left: 10px;
+            top: 13px;
+            border: 0.950725px solid #FE9013;
+            border-radius: 2px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            animation: showBlock 1s linear forwards;
+            background-image: url('../../../assets/icons/bamboo-orange.svg');
+            background-repeat: no-repeat;
+            background-position: 15% 65%;
           
             .header__logo-menu-title {
-                width: 65.6px;
-                height: 41.6px;
+                width: 58px;
+                height: 37px;
                 @include font(15.2116px, 18px);
-                color: #FE9013;
-                border: 0.950725px solid #FE9013;
+                color: #FE9013;                
                 text-align: center;
             }
         }
@@ -318,45 +322,50 @@ h3 {
     }    
 }
 
+@keyframes showBlock {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
 .header__burger {
     display: none;
     position: relative;
     width: 18px;
     height: 10px;
-    //margin-right: 23px;
+    margin-right: 0;
     cursor: pointer;
-   // transition: all 0.5s ease-in-out;
-
-    &:hover {
-        .burger-line {
-            background-color: red;
-        }
-    }
-
+   
     @include media-tablet {
-        display: block;
-        z-index: 5;
-       // margin-right: 20px;
-    }
-
-    &:before {
-        @extend %burger-line;
-        top: 0;
-        left: 0;
-    }
-
-    &:after {
-        @extend %burger-line;
-        bottom: 0;
-        left: 0;
-    }
+        display: block;   
+        z-index: 5;    
+    }    
 }
 
 .burger__line {
-    @extend %burger-line;
-    top: calc( 50% - 1px );
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: $color-white;
+    position: absolute;
     left: 0;
-   //transition: background-color 0.2s ease-in;
+    transition: all 0.5s ease-in-out;                
+    
+    &_first {
+        top: 0;
+    }
+
+    &_second {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &_third {
+        bottom: 0;
+    }
 }
 
 /*     Header end    */
@@ -402,6 +411,7 @@ h3 {
     background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #FEBDAB 100.95%, rgba(254, 210, 144, 0.7) 106.36%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #E0D8F0 80.49%, #EAF7FE 127.9%, #EAF7FE 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #E0D8F0 80.49%, #EAF7FE 127.9%, #EAF7FE 149.54%);
     padding-top: 38px;
     padding-bottom: 180px;
+    overflow: hidden;
 
     @include media-small-desktop {
         padding-top: 40px;
@@ -419,29 +429,27 @@ h3 {
 
     .container {
         width: calc(100vw - 60px);
+
         @include media-tablet {
             width: 100vw;
-        }
-        
-    }
-    overflow: hidden;
+        }        
+    }   
 }
 
 .pick__main {
     color: $color-white;
+
     @include media-tablet {
         width: calc(100vw - 40px);
         margin: 0 auto;
     }
 
     @include media-tablet {
-        width: calc(100vw - 40px);
-       
+        width: calc(100vw - 40px);       
     }
 
     @include media-mobile {
-        width: calc(100vw - 20px);
-       
+        width: calc(100vw - 20px);       
     }    
 }
 
@@ -524,8 +532,8 @@ h3 {
    margin-bottom: 100px;
 
    @include media-tablet {
-    margin-bottom: 90px;
-   }
+        margin-bottom: 90px;
+    }
 
    @include media-mobile {
         margin-bottom: 45px;
@@ -536,6 +544,7 @@ h3 {
     color: #FE9013;
     margin-left: 342px;
     margin-bottom: 20px;
+
     @include media-small-desktop {
         margin-left: 0;
         text-align: center;
@@ -595,7 +604,6 @@ h3 {
         max-width: 300px; 
         padding-right: 0;   
     }
-
 }
 
 .pick__number {
@@ -621,7 +629,6 @@ h3 {
         @include font (40.6015px, 32px, 500); 
         margin-bottom: 7px;       
     }
-
 }
 
 .pick__number-text {
@@ -647,7 +654,6 @@ h3 {
         margin-right: 36px;
         padding-top: 0;
         margin-top: 27px;
-
     }
 }
 
@@ -671,7 +677,7 @@ h3 {
     position: relative;
     margin-bottom: 48px;
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;       
      
     &::before {
         position: absolute;
@@ -779,7 +785,7 @@ h3 {
     right: 27px;
     z-index: 7;
     width: 922px; 
-    justify-content: space-between;
+    justify-content: space-between;    
 
     .amount {      
         position: relative;  
@@ -805,37 +811,26 @@ h3 {
                 background-image: url('../../../assets/icons/roller.svg');
                 border-radius: 2px;
                 z-index: 2;
-            }
 
-            @include media-tablet {
-                 // костыль
-                &::before {
-                    position: absolute;
-                    top: -15px;
-                    left: 375px;      
-                    content: "";        
-                    width: 40px;
-                    height: 40px;
-                    background-image: url('../../../assets/icons/roller.svg');
-                    border-radius: 2px;
-                    z-index: 2;
-                }           
+                @include media-mobile {
+                    top: -7.5px;
+                    left: -7.5px;  
+                    width: 20px;
+                    height: 20px;
+                    background-image: url('../../../assets/icons/roller-mobile.svg');
+                }
             }
-            
-            @include media-mobile {
-                // костыль
-               &::before {
-                   position: absolute;
-                   top: -7.5px;
-                   left: 187.5px;      
-                   content: "";        
-                   width: 20px;
-                   height: 20px;
-                   background-image: url('../../../assets/icons/roller-mobile.svg');
-                   border-radius: 2px;
-                   z-index: 2;
-               }          
-           }
+        }
+
+        &::after {
+            position: absolute;
+            content: "";
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            cursor: pointer;
+            z-index: 20;
         }
 
         @include media-mobile {
@@ -931,10 +926,6 @@ h3 {
                 display: none;
             }
 
-            //костыль
-            &:nth-child(6) {
-                color: #FE9013;
-            }
         }
 
         @include media-mobile {
