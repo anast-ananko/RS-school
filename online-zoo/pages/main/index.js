@@ -291,7 +291,6 @@ const initialReviews = (data) => {
 }
 
 const rangeValue = () => { 
-    console.log(elem.max);
     let newValue = elem.value;
     shiftReviews(newValue);        
 }
