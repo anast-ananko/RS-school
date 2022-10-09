@@ -3,6 +3,8 @@ import jsonObject from "../../pets.json" assert { type: "json" };
 import data from "../../reviews.json" assert { type: "json" };
 
 window.addEventListener('DOMContentLoaded', function() {
+    const size = window.matchMedia('(max-width: 999px)');
+
     //burger
     burgerMenuHandler(); 
     openMenuHandler();
@@ -17,7 +19,7 @@ window.addEventListener('DOMContentLoaded', function() {
     rangeHandler();
 
    //modal
-    if (document.documentElement.clientWidth < 1000) {
+    if (size.matches) {
         openModal();
     }
 });
@@ -281,11 +283,11 @@ const renderRiviewsToDom = (data) => {
 
 
 const initialReviews = (data) => {
-    let widthContent = document.documentElement.clientWidth;
+    const mediaQuery = window.matchMedia('(max-width: 1599px)');
 
-    if (widthContent < 1600) {
+    if (mediaQuery.matches) {
         elem.max = 8;
-    }
+    }   
 
     renderRiviewsToDom(data);
 }
