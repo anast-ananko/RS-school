@@ -45,7 +45,7 @@ const birdsDataEn = [
         name: 'Tit',
         species: 'Parus major',
         description: 'More than 40 different sound combinations are distinguished in the chirping of tits. They sing almost all year round, fading a little only in winter. Tits are real orderlies of the forest. One pair of tits during the nesting period protects dozens of trees from pests.',
-        image: 'https://klike.net/uploads/posts/2020-05/1590826772_3.jpg',
+        image: 'https://krasivosti.pro/uploads/posts/2021-04/1618622754_48-krasivosti_pro-p-vidi-sinits-ptitsi-krasivo-foto-54.jpg',
         audio: 'https://www.xeno-canto.org/sounds/uploaded/RFGQDPLDEC/XC518417-Kj%C3%B8ttmeis%20XC%20Helg%C3%B8ya%20Elias%20A.%20Ryberg20200108133922_079.mp3'
       }
     ],
