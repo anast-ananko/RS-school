@@ -1,0 +1,17 @@
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  color: white;
+}
+  
+.top__logo-img {
+  width: 200px;
+  height: 60px;
+}
+  
+.top__score {
+  @include font(22px, 26px);
+}

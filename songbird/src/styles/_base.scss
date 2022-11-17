@@ -1,0 +1,30 @@
+html {
+  box-sizing: border-box;
+}
+
+.body {
+  background-color: rgb(37, 38, 38);
+  font-family: 'Lato', sans-serif;
+  color: white;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  
+  @include media-small-desktop {
+    max-width: 860px;
+  }
+
+  @include media-tablet {
+    max-width: 660px;
+  }
+
+  @include media-small-tablet {
+    max-width: 420px;
+  }
+
+  @include media-mobile{
+    max-width: 320px;
+  }
+}

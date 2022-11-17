@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/favicon.ico">
+  <title>Songbird</title>
+</head>
+<body class="body">
+  <header class="header">
+    <div class="wrapper">
+      <div class="header__container">
+        <div class="header__logo">
+          <a href="../main/index.html">
+            <img src="../../assets/logo.svg" alt="logo" class="header__logo-img">
+          </a>  
+        </div>  
+        <nav class="header__nav">
+          <ul class="header__list">
+            <li class="header__item">
+              <a href="../main/index.html" class="header__link" data-i18="home">Home</a>
+            </li>
+            <li class="header__item">
+              <a href="../game/index.html" class="header__link" data-i18="game">Quiz</a>
+            </li>
+            <li class="header__item header__item_active">
+              <a href="#" class="header__link" data-i18="gallery">Gallery</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header__switch-lng">
+          <span class="header__lang header__lang-en header__lang_active">en</span>
+          <span> / </span> 
+          <span class="header__lang header__lang-ru">ru</span>
+        </div> 
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="wrapper">
+      <div class="main__container">      
+        <div class="block">
+          <button class="block__button block__button_active" data-block="0" data-i18="pre-game">
+            Разминка
+          </button>
+          <button class="block__button" data-block="1" data-i18="passerines">
+            Воробьиные
+          </button>
+          <button class="block__button" data-block="2" data-i18="forest-birds">
+            Лесные птицы
+          </button>
+          <button class="block__button" data-block="3" data-i18="song-birds">
+            Певчие птицы
+          </button>
+          <button class="block__button" data-block="4" data-i18="predator-birds">
+            Хищные птицы
+          </button>
+          <button class="block__button" data-block="5" data-i18="sea-birds">
+            Морские птицы
+          </button>
+        </div>        
+        <div class="slider">
+          <div class="slider__wrapper">           
+          </div>
+          <div class="slider__counter">
+          </div>
+        </div> 
+      </div>
+    </div> 
+  </main> 
+</body>
+</html>

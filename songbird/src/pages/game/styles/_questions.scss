@@ -1,0 +1,29 @@
+.questions {
+  width: 100%;  
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+  
+.questions__list {
+  background-color: #168866;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: white;    
+  @include font(16px, 20px);    
+}
+  
+.questions__item {
+  background-color: #168866;   
+  padding: 8px 15px;
+  flex: 1 1 auto;
+  text-align: center;
+
+  &_active {
+    background-color: #41c09a;
+  }
+}
