@@ -451,7 +451,7 @@ html {
 }
 @media (max-width: 699px) {
   .current__image {
-    text-align: center;
+    align-self: center;
     margin-right: 0;
     margin-bottom: 20px;
   }
