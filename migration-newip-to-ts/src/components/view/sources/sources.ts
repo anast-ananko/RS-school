@@ -10,27 +10,25 @@ class Sources {
             data.forEach((item) => {
                 const sourceClone = sourceItemTemp.content.cloneNode(true);
 
-                let itemName;
-                let itemEl;
                 if (sourceClone instanceof DocumentFragment) {
-                    itemName = sourceClone.querySelector('.source__item-name');
-                    itemEl = sourceClone.querySelector('.source__item');
-                }
+                    const itemName: HTMLSpanElement | null = sourceClone.querySelector('.source__item-name');
+                    const itemEl: HTMLDivElement | null = sourceClone.querySelector('.source__item');
 
-                if (itemName instanceof HTMLElement) {
-                    itemName.textContent = item.name;
-                }
+                    if (itemName) {
+                        itemName.textContent = item.name;
+                    }
 
-                if (itemEl instanceof HTMLElement) {
-                    itemEl.setAttribute('data-source-id', item.id);
+                    if (itemEl) {
+                        itemEl.setAttribute('data-source-id', item.id);
+                    }
                 }
 
                 fragment.append(sourceClone);
             });
         }
 
-        const sources = document.querySelector('.sources');
-        if (sources instanceof HTMLElement) {
+        const sources: HTMLDivElement | null = document.querySelector('.sources');
+        if (sources) {
             sources.append(fragment);
         }
     }
