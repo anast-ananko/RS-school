@@ -11,10 +11,20 @@ class App {
     }
 
     public start(): void {
-        const buttons: HTMLDivElement | null = document.querySelector('.sources');
-        if (buttons) {
-            buttons.addEventListener('click', (e) => this.controller.getNews(e, (data) => this.view.drawNews(data)));
+        const buttonsSources: HTMLDivElement | null = document.querySelector('.sources');
+        if (buttonsSources) {
+            buttonsSources.addEventListener('click', (e) =>
+                this.controller.getNews(e, (data) => this.view.drawNews(data))
+            );
             this.controller.getSources((data) => this.view.drawSources(data));
+        }
+
+        this.view.drawCategories();
+        const buttonsCategories: HTMLDivElement | null = document.querySelector('.categories');
+        if (buttonsCategories) {
+            buttonsCategories.addEventListener('click', (e) =>
+                this.controller.getNewsByCategories(e, (data) => this.view.drawNews(data))
+            );
         }
     }
 }

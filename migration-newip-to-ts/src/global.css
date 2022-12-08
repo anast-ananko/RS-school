@@ -13,6 +13,11 @@ header h1 {
     font-weight: 800;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+}
+
 footer {
     height: 100px;
     display: flex;
@@ -20,18 +25,22 @@ footer {
     justify-content: center;
     flex-direction: column;
 }
+
 footer .copyright {
     font-size: 14px;
     color: #333;
     text-align: center;
     padding-top: 30px;
 }
+
 footer .copyright a {
     color: #444;
 }
+
 footer .copyright a:hover {
     color: #555;
 }
+
 footer .copyright:before {
     content: '©';
 }
