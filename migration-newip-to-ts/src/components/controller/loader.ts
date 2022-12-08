@@ -52,7 +52,7 @@ class Loader {
         method: string,
         endpoint: Endpoints | undefined,
         callback: (data: T) => void,
-        options = {}
+        options: Options = {}
     ): void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
