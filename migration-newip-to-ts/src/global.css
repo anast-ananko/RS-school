@@ -42,8 +42,7 @@ main {
     border: 16px solid rgba(0, 0, 0, 0.18);
     border-left: 0;
     border-right: 0;
-    background-color: #30c5ff;
-    
+    background-color: #30c5ff;    
 }
 
 footer {
@@ -82,13 +81,20 @@ footer .copyright:before {
     max-width: 1200px;
     width: 100%;
 }
+
+@media screen and (max-width: 400px) {
+    .footer__container  {
+        max-width: 295px;
+    }
+}
   
 .footer__rss {
     width: 120px;
     background-image: url('./assets/rs_school_js.svg');
     background-repeat: no-repeat;
 }
-  
+
+
 .footer__year {
     font-size: 22px;
     line-height: 26px;
