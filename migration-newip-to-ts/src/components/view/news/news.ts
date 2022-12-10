@@ -1,5 +1,6 @@
 import './news.css';
 import { INewsStructure } from '../../interfaces/interfaces';
+import image from '../../../assets/news_placeholder.png';
 
 class News {
     public draw(data: INewsStructure[]): void {
@@ -20,7 +21,7 @@ class News {
 
                     const photo: HTMLDivElement | null = newsClone.querySelector('.news__meta-photo');
                     if (photo) {
-                        photo.style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+                        photo.style.backgroundImage = `url(${item.urlToImage || image})`;
                     }
 
                     const author: HTMLLIElement | null = newsClone.querySelector('.news__meta-author');
