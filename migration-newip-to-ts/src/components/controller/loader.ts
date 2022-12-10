@@ -4,22 +4,24 @@ type Options = {
     [key: string]: string;
 };
 
-type ParamsResp = {
+interface IParamsResp {
     endpoint: Endpoints;
     options: Options;
-};
+}
 
-class Loader {
-    private readonly baseLink: string;
-    private readonly options: Options;
+interface IUrl {
+    readonly baseLink: string;
+    readonly options: Options;
+}
 
-    constructor(baseLink: string, options: Options) {
+class Loader implements IUrl {
+    constructor(readonly baseLink: string, readonly options: Options) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     protected getResp<T>(
-        { endpoint, options = {} }: Partial<ParamsResp>,
+        { endpoint, options = {} }: Partial<IParamsResp>,
         callback: (data: T) => void = () => {
             console.error('No callback for GET response');
         }
