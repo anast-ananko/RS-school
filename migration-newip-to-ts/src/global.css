@@ -82,12 +82,12 @@ footer .copyright:before {
     width: 100%;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 1230px) {
     .footer__container  {
-        max-width: 295px;
+        max-width: calc(100% - 20px);
     }
 }
-  
+
 .footer__rss {
     width: 120px;
     background-image: url('./assets/rs_school_js.svg');
