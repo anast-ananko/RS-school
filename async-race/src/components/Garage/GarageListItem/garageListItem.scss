@@ -1,0 +1,52 @@
+.car__top {
+  display: flex;
+	margin-bottom: 5px;
+
+	> button {
+		margin-right: 5px;
+		padding: 0 10px;
+		font-size: 18px;
+		cursor: pointer;
+		border-radius: 5px;
+	}
+}
+
+.car__title {
+	margin-left: 10px;
+	color: yellowgreen;
+	font-size: 18px;
+}
+
+.car__block {
+	position: relative;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	display: flex;
+	border-bottom: 3px dashed white;
+}
+
+.car__buttons {
+	display: flex;
+	color: yellowgreen;
+	font-size: 20px;
+	align-items: flex-start;
+
+	> * {
+
+		border: 1px solid yellowgreen;
+		border-radius: 5px;
+		margin-right: 5px;
+		padding: 3px;
+		cursor: pointer;
+	}
+}
+
+.ico {
+	position: absolute;
+	top: 10px;
+	right: 130px;
+	background-image: url("../../../assets/flag.png");
+	background-size: 30px 30px;
+	width: 30px;
+	height: 30px;
+}
