@@ -1,21 +1,32 @@
-import { useState } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { useState, FunctionComponent } from "react";
+
+import { IGarageListItem } from "../../../interfaces/garageListItem";
+
 import "./garageListItem.scss";
 
-const GarageListItem = ({
+const GarageListItem: FunctionComponent<IGarageListItem> = ({
   name,
   color,
   id,
-}: {
-  name: string;
-  color: string;
-  id: number;
+  delCar,
+  countCars,
+  setCountCars,
+  selectCar,
 }) => {
+  const removeCar = (id: number): void => {
+    delCar(id);
+    setCountCars(countCars - 1);
+  };
+
   return (
     <div className="car">
       <div className="car__top">
-        <button className="car__select">Select</button>
-        <button className="car__remove">Remove</button>
+        <button className="car__select" onClick={() => selectCar(id)}>
+          Select
+        </button>
+        <button className="car__remove" onClick={() => removeCar(id)}>
+          Remove
+        </button>
         <span className="car__title">{name}</span>
       </div>
       <div className="car__block">

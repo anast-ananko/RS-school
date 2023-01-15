@@ -1,14 +1,65 @@
-import { useState } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { FunctionComponent } from "react";
+import { useState, useEffect } from "react";
+
+import { createCar } from "../../../services/apiGarage";
+import { getCar } from "../../../services/apiGarage";
+import { updateCar } from "../../../services/apiGarage";
+import { ICar } from "../../../interfaces/car";
+import { IControl } from "../../../interfaces/control";
 
 import "./control.scss";
 
-const Control = () => {
+const Control: FunctionComponent<IControl> = ({
+  countCars,
+  setCountCars,
+  selectedCar,
+  setSelectedCar,
+  isUpdate,
+  setIsUpdate,
+}) => {
   const [titleCreate, setTitleCreate] = useState<string>("");
   const [colorCreate, setColorCreate] = useState<string>("");
 
   const [titleUpdate, setTitleUpdate] = useState<string>("");
   const [colorUpdate, setColorUpdate] = useState<string>("");
+
+  useEffect(() => {
+    updateSelectedCar(selectedCar);
+  }, [selectedCar]);
+
+  const updateSelectedCar = async (id: number | undefined): Promise<void> => {
+    if (typeof id === "number") {
+      const car = await getCar(id);
+      onCarLoaded(car);
+    }
+  };
+
+  const onCarLoaded = (car: ICar): void => {
+    setTitleUpdate(car.name);
+    setColorUpdate(car.color);
+  };
+
+  const createNewCar = (): void => {
+    if (titleCreate && colorCreate) {
+      createCar({ name: titleCreate, color: colorCreate });
+    }
+    setCountCars(countCars + 1);
+    setTitleCreate("");
+    setColorCreate("#000000");
+  };
+
+  const updCar = (): void => {
+    if (typeof selectedCar === "number") {
+      updateCar(selectedCar, {
+        name: titleUpdate,
+        color: colorUpdate,
+      });
+    }
+    setIsUpdate(!isUpdate);
+    setSelectedCar(0);
+    setTitleUpdate("");
+    setColorUpdate("#000000");
+  };
 
   const titleCreateHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTitleCreate(e.target.value);
@@ -41,7 +92,9 @@ const Control = () => {
           value={colorCreate}
           onChange={(e) => colorCreateHandler(e)}
         />
-        <button className="control__create-btn">Create</button>
+        <button className="control__create-btn" onClick={() => createNewCar()}>
+          Create
+        </button>
       </div>
       <div className="control__update">
         <input
@@ -56,7 +109,9 @@ const Control = () => {
           value={colorUpdate}
           onChange={(e) => colorUpdateHandler(e)}
         />
-        <button className="control__update-btn">Update</button>
+        <button className="control__update-btn" onClick={() => updCar()}>
+          Update
+        </button>
       </div>
       <div className="buttons">
         <button className="race-button">Race</button>
