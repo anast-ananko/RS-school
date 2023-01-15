@@ -11,7 +11,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   delCar,
   countCars,
   setCountCars,
-  selectCar,
+  setSelectedCar,
 }) => {
   const removeCar = (id: number): void => {
     delCar(id);
@@ -21,7 +21,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   return (
     <div className="car">
       <div className="car__top">
-        <button className="car__select" onClick={() => selectCar(id)}>
+        <button className="car__select" onClick={() => setSelectedCar(id)}>
           Select
         </button>
         <button className="car__remove" onClick={() => removeCar(id)}>

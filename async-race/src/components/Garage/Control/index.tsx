@@ -15,7 +15,6 @@ const Control: FunctionComponent<IControl> = ({
   countCars,
   setCountCars,
   selectedCar,
-  setSelectedCar,
   isUpdate,
   setIsUpdate,
 }) => {
@@ -51,6 +50,7 @@ const Control: FunctionComponent<IControl> = ({
   };
 
   const updCar = (): void => {
+    console.log(selectedCar);
     if (typeof selectedCar === "number") {
       updateCar(selectedCar, {
         name: titleUpdate,
@@ -58,7 +58,6 @@ const Control: FunctionComponent<IControl> = ({
       });
     }
     setIsUpdate(!isUpdate);
-    setSelectedCar(0);
     setTitleUpdate("");
     setColorUpdate("#000000");
   };
@@ -100,7 +99,11 @@ const Control: FunctionComponent<IControl> = ({
           value={colorCreate}
           onChange={(e) => colorCreateHandler(e)}
         />
-        <button className="control__create-btn" onClick={() => createNewCar()}>
+        <button
+          className="control__create-btn"
+          onClick={() => createNewCar()}
+          disabled={titleCreate ? false : true}
+        >
           Create
         </button>
       </div>
@@ -117,7 +120,11 @@ const Control: FunctionComponent<IControl> = ({
           value={colorUpdate}
           onChange={(e) => colorUpdateHandler(e)}
         />
-        <button className="control__update-btn" onClick={() => updCar()}>
+        <button
+          className="control__update-btn"
+          onClick={() => updCar()}
+          disabled={titleUpdate ? false : true}
+        >
           Update
         </button>
       </div>
