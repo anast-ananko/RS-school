@@ -5,5 +5,5 @@ export interface IGarageList {
   delCar: (id: number) => void;
   countCars: number;
   setCountCars: (id: number) => void;
-  selectCar: (id: number) => void;
+  setSelectedCar: (id: number) => void;
 }
