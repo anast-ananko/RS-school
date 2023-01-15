@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import flag from "../../../assets/flag.png";
 import "./garageListItem.scss";
 
-const GarageListItem = () => {
+const GarageListItem = ({
+  name,
+  color,
+  id,
+}: {
+  name: string;
+  color: string;
+  id: number;
+}) => {
   return (
     <div className="car">
       <div className="car__top">
         <button className="car__select">Select</button>
         <button className="car__remove">Remove</button>
-        <span className="car__title">FFFFF</span>
+        <span className="car__title">{name}</span>
       </div>
       <div className="car__block">
         <div className="car__buttons">
@@ -30,7 +37,7 @@ const GarageListItem = () => {
             </metadata>
             <g
               transform="translate(0.000000,900.000000) scale(0.100000,-0.100000)"
-              fill="#FFFFFF"
+              fill={color}
               stroke="none"
             >
               <path
