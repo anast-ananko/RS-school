@@ -16,7 +16,7 @@ const Garage = () => {
     updateGarage(1);
   }, []);
 
-  const updateGarage = async (page: number) => {
+  const updateGarage = async (page: number): Promise<void> => {
     const { cars, count } = await getCars(page);
     if (Array.isArray(cars) && typeof count === "string") {
       onCarsLoaded(cars, count);
@@ -24,10 +24,8 @@ const Garage = () => {
   };
 
   const onCarsLoaded = (cars: ICar[], count: string): void => {
-    console.log(cars);
     setCountCars(+count);
     setGarageList(cars);
-    //console.log(garageList);
   };
 
   return (
