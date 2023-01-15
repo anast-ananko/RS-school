@@ -6,6 +6,8 @@ import { getCar } from "../../../services/apiGarage";
 import { updateCar } from "../../../services/apiGarage";
 import { ICar } from "../../../interfaces/car";
 import { IControl } from "../../../interfaces/control";
+import generateRandomName from "../../../helpers/generateRandomName";
+import generateRandomColor from "../../../helpers/generateRandomColor";
 
 import "./control.scss";
 
@@ -59,6 +61,12 @@ const Control: FunctionComponent<IControl> = ({
     setSelectedCar(0);
     setTitleUpdate("");
     setColorUpdate("#000000");
+  };
+
+  const generateRandomCars = () => {
+    for (let i = 0; i < 100; i++) {
+      createCar({ name: generateRandomName(), color: generateRandomColor() });
+    }
   };
 
   const titleCreateHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -116,7 +124,9 @@ const Control: FunctionComponent<IControl> = ({
       <div className="buttons">
         <button className="race-button">Race</button>
         <button className="reset-button">Reset</button>
-        <button className="generate-button">Generate cars</button>
+        <button className="generate-button" onClick={generateRandomCars}>
+          Generate cars
+        </button>
       </div>
     </div>
   );
