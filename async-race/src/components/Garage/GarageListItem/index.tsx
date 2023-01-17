@@ -17,7 +17,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   index,
 }) => {
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
-  const [isInterrupted, setIsInterrupted] = useState<boolean>(false);
+  //const [isInterrupted, setIsInterrupted] = useState<boolean>(false);
   const [time, setTime] = useState<number>(0);
   const [isStop, setIsStop] = useState<boolean>(false);
 
@@ -26,22 +26,18 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   const nodeRef = React.useRef<HTMLDivElement>(null);
   const myRef = React.useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   updateGarage(page);
-  // }, [activeId]);
-
   const removeCar = (id: number): void => {
     delCar(id);
     setCountCars(countCars - 1);
   };
 
-  const startT = async () => {
-    const params = await startEngine(id);
-    setTime(params.distance / params.velocity);
-  };
+  // const startT = async () => {
+  //   const params = await startEngine(id);
+  //   setTime(params.distance / params.velocity);
+  // };
 
   const start = () => {
-    setActiveId(id);
+    
     let width;
     if (myRef.current) {
       width = myRef.current.clientWidth - 170;
@@ -53,10 +49,8 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     );
 
     setIsStop(true);
-    //console.log(nodeRef.cdataset!.setId);
-
+    setActiveId(id);
     console.log(activeId);
-
     setIsAnimating(true);
   };
 
