@@ -27,17 +27,22 @@
 
 .car__buttons {
 	display: flex;
-	color: yellowgreen;
-	font-size: 20px;
 	align-items: flex-start;
 
 	> * {
-
+		background-color: black;
+		font-size: 20px;
+		color: yellowgreen;
 		border: 1px solid yellowgreen;
 		border-radius: 5px;
 		margin-right: 5px;
 		padding: 3px;
 		cursor: pointer;
+
+		&:disabled {
+			border: 1px solid grey;
+			color: grey;
+		}
 	}
 }
 
@@ -49,4 +54,29 @@
 	background-size: 30px 30px;
 	width: 30px;
 	height: 30px;
+}
+
+$screen-width: var(--screen-width);
+
+.move-enter {
+  transform: translateX(0px);
+}
+.move-enter-active {
+  transform: translateX($screen-width);
+  ///transition: transform 1s;
+}
+
+.move-enter-done {
+  transform: translateX($screen-width);
+}
+
+.move-exit {
+transform: translateX($screen-width);
+  //animation-fill-mode: forwards;
+}
+.move-exit-active {
+}
+
+.move-exit-done {
+  transform: translateX($screen-width);
 }

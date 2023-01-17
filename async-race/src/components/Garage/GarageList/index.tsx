@@ -16,7 +16,7 @@ const GarageList: FunctionComponent<IGarageList> = ({
 }) => {
   return (
     <div className="garage">
-      {garageList.map((item: ICar) => (
+      {garageList.map((item: ICar, index) => (
         <GarageListItem
           countCars={countCars}
           setCountCars={setCountCars}
@@ -26,6 +26,7 @@ const GarageList: FunctionComponent<IGarageList> = ({
           color={item.color}
           key={item.id}
           setSelectedCar={setSelectedCar}
+          index={index}
         />
       ))}
     </div>

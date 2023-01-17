@@ -38,9 +38,9 @@ const Garage: FunctionComponent = () => {
     await deleteCar(id);
   };
 
-  const selectCar = (id: number): void => {
-    setSelectedCar(id);
-  };
+  // const selectCar = (id: number): void => {
+  //   setSelectedCar(id);
+  // };
 
   const prevPage = (): void => {
     if (page > MIN_PAGE) {
