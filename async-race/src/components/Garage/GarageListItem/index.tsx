@@ -37,7 +37,6 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   // };
 
   const start = () => {
-    
     let width;
     if (myRef.current) {
       width = myRef.current.clientWidth - 170;
@@ -84,7 +83,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
         </div>
         <CSSTransition
           //key={id}
-          in={isAnimating && (activeId === +nodeRef.current!.dataset!.setId!)}
+          in={isAnimating && activeId === +nodeRef.current!.dataset!.setId!}
           timeout={1000}
           nodeRef={nodeRef}
           classNames="move"

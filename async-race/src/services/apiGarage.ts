@@ -61,14 +61,3 @@ export async function updateCar(
 
   return car;
 }
-
-// const updateGarage = async () => {
-//   const { cars, count } = await getCars(1);
-//   console.log(cars);
-//   console.log(count);
-// };
-
-// const ge = async () => {
-//   const car = await getCar(1);
-//   console.log(car);
-// };
