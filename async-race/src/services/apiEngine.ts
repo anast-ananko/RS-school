@@ -25,8 +25,13 @@ export const stopEngine = async (id: number): Promise<ICarParams> => {
   return params;
 };
 
-const drive = async (id: number): Promise<IDrive> => {
-  const responce: Response = await fetch(`${_apiEngine}?id=${id}&status=drive`);
+export const drive = async (id: number): Promise<IDrive> => {
+  const responce: Response = await fetch(
+    `${_apiEngine}?id=${id}&status=drive`,
+    {
+      method: "PATCH",
+    }
+  );
 
   if (responce.status !== 200) {
     return { success: false };

@@ -53,6 +53,10 @@
   height: 30px;
 }
 
+.movev {
+  animation-play-state: paused;
+}
+
 .move-enter {
   transform: translateX(0px);
 }
@@ -66,10 +70,6 @@
 }
 
 .move-exit {
-  transform: translateX(var(--screen-width));
-}
-
-.move-exit-done {
   transform: translateX(var(--screen-width));
 }
 

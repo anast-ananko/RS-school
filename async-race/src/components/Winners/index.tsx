@@ -17,9 +17,15 @@ const Winners = () => {
   const [sort, setSort] = useState<string>("id");
   const [order, setOrder] = useState<string>("ASC");
 
+  const arrayWinners: ITableWinner[] = [];
+
   useEffect(() => {
     updateWinners(page, sort, order);
   }, []);
+
+  useEffect(() => {
+    createCarsList();
+  }, [winnersList]);
 
   const updateWinners = async (
     page: number,
@@ -32,43 +38,25 @@ const Winners = () => {
     }
   };
 
-  //   let tmpArray: ITableWinner[] = [];
-
-  //   function itemCheck(item: ITableWinner) {
-  //     if (Array.isArray(tmpArray)) {
-  //       if (tmpArray.indexOf(item.i) === -1) {
-  //         tmpArray.push(item.i);
-  //         return true;
-  //     }
-  //     return false;
-  //     }
-
-  // }
-
   const onCarsLoaded = (winners: IWinner[], count: string): void => {
     setCountWinners(+count);
     setWinnersList(winners);
-    //console.log(winners)
-    //setCarsList(createCarsList(winners)));
-    // if (Array.isArray(winners)) {
-    //   setCarsList(createCarsList(winners));
-    // }
-    console.log(createCarsList(winners));
-    console.log(att);
   };
-  const att: ITableWinner[] = [];
 
-  const createCarsList = (winners: IWinner[]) => {
-    winners.forEach((item, i) => {
-      getCurrentCar(item.id).then((car) => {
-        att.push({
-          ...item,
-          i: i,
-          name: car.name,
-          color: car.color,
-        });
-      });
-    });
+  const createCarsList = async () => {
+    console.log(winnersList.length);
+    for (let i = 0; i < winnersList.length; i++) {
+      const car = await getCar(winnersList[i].id);
+      console.log(car);
+      arrayWinners[i] = {
+        i: i,
+        name: car.name,
+        color: car.color,
+        wins: winnersList[i].wins,
+        time: winnersList[i].time,
+      };
+    }
+    setCarsList(arrayWinners);
   };
 
   // const createCarsList = (winners: IWinner[]) => {
@@ -84,27 +72,6 @@ const Winners = () => {
   //   });
   // };
 
-  // const createCarsList = (winners: IWinner[]) => {
-  //   const t = winners.map((item, i) => {
-  //     getCurrentCar(item.id).then((car) => {
-  //       // console.log(i, car.name, car.color, item.wins, item.time,)
-  //       return {
-  //         i: i,
-  //         name: car.name,
-  //         color: car.color,
-  //         wins: item.wins,
-  //         time: item.time,
-  //       } ;
-  //     });
-  //   });
-  //   console.log(t)
-  // };
-
-  const getCurrentCar = async (id: number): Promise<ICar> => {
-    const car = await getCar(id);
-    return car;
-  };
-
   return (
     <div className="winners">
       <h2 className="winners__title">Winners ({countWinners})</h2>
@@ -118,6 +85,17 @@ const Winners = () => {
             <th>Wins</th>
             <th>Best time (seconds)</th>
           </tr>
+          {carsList.map((item) => {
+            return (
+              <tr key={item.i}>
+                <th>{item.i + 1}</th>
+                <th>{item.color}</th>
+                <th>{item.name}</th>
+                <th>{item.wins}</th>
+                <th>{item.time}</th>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <div className="car__pagination">

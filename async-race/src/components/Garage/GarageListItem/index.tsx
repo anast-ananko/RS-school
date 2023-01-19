@@ -3,6 +3,7 @@ import { CSSTransition } from "react-transition-group";
 import React from "react";
 import { IGarageListItem } from "../../../interfaces/garageListItem";
 import { startEngine } from "../../../services/apiEngine";
+import { drive } from "../../../services/apiEngine";
 
 import "./garageListItem.scss";
 
@@ -21,7 +22,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   const [time, setTime] = useState<number>(0);
   const [isStop, setIsStop] = useState<boolean>(false);
 
-  const [activeId, setActiveId] = useState<number>(0);
+  //const [activeId, setActiveId] = useState<number>(0);
 
   const nodeRef = React.useRef<HTMLDivElement>(null);
   const myRef = React.useRef<HTMLDivElement>(null);
@@ -31,13 +32,14 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     setCountCars(countCars - 1);
   };
 
-  // const startT = async () => {
-  //   const params = await startEngine(id);
-  //   setTime(params.distance / params.velocity);
-  // };
+  const startEngineCar = async () => {
+    const params = await startEngine(id);
+    console.log(params);
+    setTime(params.distance / params.velocity);
+  };
 
-  const start = () => {
-    let width;
+  const start = async () => {
+    let width = 0;
     if (myRef.current) {
       width = myRef.current.clientWidth - 170;
     }
@@ -46,16 +48,41 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
       "--screen-width",
       `${width}px`
     );
-
     setIsStop(true);
-    setActiveId(id);
-    console.log(activeId);
+    const params = await startEngine(id);
+    console.log(params);
+    setTime(params.distance / params.velocity);
+    startEngineCar();
+
+    //setActiveId(id);
     setIsAnimating(true);
+
+    try {
+      drive(id);
+    } catch {
+      setIsInterrupted(true);
+      // window.document.documentElement.style.setProperty(
+      //   "--state",
+      //   'paused'
+      // );
+    }
   };
 
   const carStyle = {
-    transitionDuration: `${5000}ms`,
+    transitionDuration: `${time}ms`,
   };
+
+  const [isInterrupted, setIsInterrupted] = useState(false);  
+  
+  const onEnter = (isAppearing: boolean) => {
+    if (isInterrupted && isAppearing) {
+      setIsInterrupted(false);
+    }
+  }
+
+  useEffect(() => {
+    setIsAnimating(false);
+  }, [isInterrupted]);
 
   return (
     <div className="car">
@@ -83,10 +110,12 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
         </div>
         <CSSTransition
           //key={id}
-          in={isAnimating && activeId === +nodeRef.current!.dataset!.setId!}
+          in={isAnimating && !isInterrupted}
           timeout={1000}
           nodeRef={nodeRef}
           classNames="move"
+          onEntering={onEnter}
+         // onExit={onEntering}
         >
           <div ref={nodeRef} style={carStyle} data-set-id={id}>
             <svg
