@@ -53,24 +53,4 @@
   height: 30px;
 }
 
-.movev {
-  animation-play-state: paused;
-}
-
-.move-enter {
-  transform: translateX(0px);
-}
-
-.move-enter-active {
-  transform: translateX(var(--screen-width));
-}
-
-.move-enter-done {
-  transform: translateX(var(--screen-width));
-}
-
-.move-exit {
-  transform: translateX(var(--screen-width));
-}
-
 /*# sourceMappingURL=garageListItem.css.map */

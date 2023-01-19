@@ -56,35 +56,35 @@
 	height: 30px;
 }
 
-$screen-width: var(--screen-width);
-// $state: var(--state);
+// $screen-width: var(--screen-width);
+// // $state: var(--state);
 
-.movev {
-	animation-play-state: paused;
-}
+// .movev {
+// 	animation-play-state: paused;
+// }
 
-.move-enter {
-  transform: translateX(0px);
-}
-.move-enter-active {
-  //transform: translateX(calc(100vw - 200px));
-  ///transition: transform 1s;
-  transform: translateX($screen-width);
-}
+// .move-enter {
+//   transform: translateX(0px);
+// }
+// .move-enter-active {
+//   //transform: translateX(calc(100vw - 200px));
+//   ///transition: transform 1s;
+//   transform: translateX($screen-width);
+// }
 
-.move-enter-done {
-	//transform: translateX(calc(100vw - 200px));
-  transform: translateX($screen-width);
-}
+// .move-enter-done {
+// 	//transform: translateX(calc(100vw - 200px));
+//   transform: translateX($screen-width);
+// }
 
-.move-exit {
-	//transform: translateX(calc(100vw - 200px));
-transform: translateX($screen-width);
-  //animation-fill-mode: forwards;
-}
-.move-exit-active {
-}
+// .move-exit {
+// 	//transform: translateX(calc(100vw - 200px));
+// transform: translateX($screen-width);
+//   //animation-fill-mode: forwards;
+// }
+// .move-exit-active {
+// }
 
-.move-exit-done {
-  //transform: translateX($screen-width);
-}
+// .move-exit-done {
+//   //transform: translateX($screen-width);
+// }
