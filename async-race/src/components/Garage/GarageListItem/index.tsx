@@ -17,20 +17,14 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   countCars,
   setCountCars,
   setSelectedCar,
-  index,
 }) => {
-  const [isAnimating, setIsAnimating] = useState<boolean>(false);
   const [time, setTime] = useState<number>(0);
   const [isStop, setIsStop] = useState<boolean>(false);
 
   const nodeRef = React.useRef<HTMLDivElement>(null);
   const myRef = React.useRef<HTMLDivElement>(null);
 
-  const positionRef = React.useRef({ transform: "translateX(0px)" });
-  const [position, setPosition] = useState({});
-
-  const [animationProps, setAnimationProps] = useSpring(() => ({
-    transform: "translateX(calc(100vw - 200px))",
+  const [animationProps, api] = useSpring(() => ({
     // from: { transform: "translateX(0)" },
     // to: { transform: "translateX(calc(100vw - 200px))" },
   }));
@@ -47,28 +41,20 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   };
 
   const start = async () => {
-    let width = 0;
-    if (myRef.current) {
-      width = myRef.current.clientWidth - 170;
-    }
-
-    window.document.documentElement.style.setProperty(
-      "--screen-width",
-      `${width}px`
-    );
     setIsStop(true);
     const params = await startEngine(id);
-    console.log(params);
+    //console.log(params);
     setTime(params.distance / params.velocity);
     startEngineCar();
 
-    setIsAnimating(true);
+    api.start({ transform: "translateX(calc(100vw - 200px))" });
 
-    try {
-      drive(id);
-    } catch {
-      setIsAnimating(false);
-      setIsStop(false);
+    const res = await drive(id);
+    if (!res.success) {
+      // работает, но в начальное положение не надо скидывать
+      api.set({transform: "translateX(0px)"});
+      // почему-то не работает
+      api.stop();
     }
   };
 
@@ -77,14 +63,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   };
 
   const stop = () => {
-    const rect = nodeRef!.current!.getBoundingClientRect();
-    setPosition({
-      x: rect.x,
-      y: rect.y,
-      width: rect.width,
-      height: rect.height,
-    });
-    setIsAnimating(false);
+    api.set({ transform: "translateX(0px)" });
     setIsStop(false);
   };
 
@@ -116,19 +95,10 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
             B
           </button>
         </div>
-        {/* <CSSTransition
-          //key={id}
-          in={isAnimating && !isInterrupted}
-          timeout={1000}
-          nodeRef={nodeRef}
-          classNames="move"
-          onEntering={onEnter}
-         // onExit={onEntering}
-        > */}
         <animated.div
           ref={nodeRef}
           style={{
-            transform: isAnimating ? animationProps.transform : "",
+            ...animationProps,
             ...carStyle,
           }}
         >
@@ -197,7 +167,6 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
             </g>
           </svg>
         </animated.div>
-        {/* </CSSTransition> */}
         <div className="ico"></div>
       </div>
     </div>
