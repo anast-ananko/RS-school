@@ -18,7 +18,10 @@ export const startEngine = async (id: number): Promise<ICarParams> => {
 
 export const stopEngine = async (id: number): Promise<ICarParams> => {
   const responce: Response = await fetch(
-    `${_apiEngine}?id=${id}&status=stopped`
+    `${_apiEngine}?id=${id}&status=stopped`,
+    {
+      method: "PATCH",
+    }
   );
 
   const params: Promise<ICarParams> = await responce.json();

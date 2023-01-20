@@ -5,9 +5,11 @@ import { useSpring, animated } from "@react-spring/web";
 
 import { IGarageListItem } from "../../../interfaces/garageListItem";
 import { startEngine } from "../../../services/apiEngine";
+import { stopEngine } from "../../../services/apiEngine";
 import { drive } from "../../../services/apiEngine";
 
 import "./garageListItem.scss";
+import { timeEnd } from "console";
 
 const GarageListItem: FunctionComponent<IGarageListItem> = ({
   name,
@@ -36,7 +38,6 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
 
   const startEngineCar = async () => {
     const params = await startEngine(id);
-    console.log(params);
     setTime(params.distance / params.velocity);
   };
 
@@ -44,17 +45,23 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     setIsStop(true);
     const params = await startEngine(id);
     //console.log(params);
-    setTime(params.distance / params.velocity);
     startEngineCar();
-
-    api.start({ transform: "translateX(calc(100vw - 200px))" });
+    //api.start({ transform: "translateX(calc(100vw - 200px))" });
+    const screenWidth = window.innerWidth - 220;
+    api.start({ transform: `translateX(${screenWidth}px)` });
+    setTimeout(() => {
+      console.log("done");
+      stopEngine(id);
+    }, params.distance / params.velocity);
 
     const res = await drive(id);
     if (!res.success) {
       // работает, но в начальное положение не надо скидывать
-      api.set({transform: "translateX(0px)"});
+      //api.set({ transform: "translateX(0px)" });
       // почему-то не работает
-      api.stop();
+      //api.stop();
+      const rect = nodeRef!.current!.getBoundingClientRect();
+      api.set({ transform: `translateX(${rect.x - 60}px)` });
     }
   };
 
