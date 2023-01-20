@@ -17,6 +17,8 @@ const Control: FunctionComponent<IControl> = ({
   selectedCar,
   isUpdate,
   setIsUpdate,
+  setIsRace,
+  setIsReset,
 }) => {
   const [titleCreate, setTitleCreate] = useState<string>("");
   const [colorCreate, setColorCreate] = useState<string>("");
@@ -84,6 +86,16 @@ const Control: FunctionComponent<IControl> = ({
     setColorUpdate(e.target.value);
   };
 
+  const race = () => {
+    setIsReset(false);
+    setIsRace(true);
+  };
+
+  const reset = () => {
+    setIsReset(true);
+    setIsRace(false);
+  };
+
   return (
     <div className="control">
       <div className="control__create">
@@ -129,8 +141,12 @@ const Control: FunctionComponent<IControl> = ({
         </button>
       </div>
       <div className="buttons">
-        <button className="race-button">Race</button>
-        <button className="reset-button">Reset</button>
+        <button className="race-button" onClick={race}>
+          Race
+        </button>
+        <button className="reset-button" onClick={reset}>
+          Reset
+        </button>
         <button className="generate-button" onClick={generateRandomCars}>
           Generate cars
         </button>

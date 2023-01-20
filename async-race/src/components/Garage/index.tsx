@@ -52,6 +52,9 @@ const Garage: FunctionComponent = () => {
     if (page < MAX_PAGE) setPage(page + 1);
   };
 
+  const [isRace, setIsRace] = useState<boolean>(false);
+  const [isReset, setIsReset] = useState<boolean>(false);
+
   return (
     <>
       <Control
@@ -60,6 +63,8 @@ const Garage: FunctionComponent = () => {
         countCars={countCars}
         setCountCars={setCountCars}
         selectedCar={selectedCar}
+        setIsRace={setIsRace}
+        setIsReset={setIsReset}
       />
       <h2 className="garage__title">Garage ({countCars})</h2>
       <h4 className="garage__page">Page # {page}</h4>
@@ -69,6 +74,8 @@ const Garage: FunctionComponent = () => {
         countCars={countCars}
         setCountCars={setCountCars}
         setSelectedCar={setSelectedCar}
+        isRace={isRace}
+        isReset={isReset}
       />
       <div className="car__pagination">
         <button

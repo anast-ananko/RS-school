@@ -7,4 +7,6 @@ export interface IGarageListItem {
   setCountCars: (id: number) => void;
   setSelectedCar: (id: number) => void;
   index: number;
+  isRace: boolean;
+  isReset: boolean;
 }

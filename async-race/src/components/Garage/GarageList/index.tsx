@@ -13,6 +13,8 @@ const GarageList: FunctionComponent<IGarageList> = ({
   countCars,
   setCountCars,
   setSelectedCar,
+  isRace,
+  isReset,
 }) => {
   return (
     <div className="garage">
@@ -27,6 +29,8 @@ const GarageList: FunctionComponent<IGarageList> = ({
           key={item.id}
           setSelectedCar={setSelectedCar}
           index={index}
+          isRace={isRace}
+          isReset={isReset}
         />
       ))}
     </div>

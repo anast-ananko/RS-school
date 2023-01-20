@@ -6,4 +6,6 @@ export interface IGarageList {
   countCars: number;
   setCountCars: (id: number) => void;
   setSelectedCar: (id: number) => void;
+  isRace: boolean;
+  isReset: boolean;
 }

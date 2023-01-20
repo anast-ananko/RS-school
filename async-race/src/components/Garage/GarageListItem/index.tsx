@@ -19,6 +19,8 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   countCars,
   setCountCars,
   setSelectedCar,
+  isRace,
+  isReset,
 }) => {
   const [time, setTime] = useState<number>(0);
   const [isStop, setIsStop] = useState<boolean>(false);
@@ -30,6 +32,25 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     // from: { transform: "translateX(0)" },
     // to: { transform: "translateX(calc(100vw - 200px))" },
   }));
+
+  useEffect(() => {
+    if (isRace) {
+      setIsStop(true);
+      start();
+    }
+    //else {
+    //   stop();
+    // }
+
+    console.log(1);
+  }, [isRace]);
+
+  useEffect(() => {
+    if (isReset) {
+      setIsStop(false);
+      stop();
+    }
+  }, [isReset]);
 
   const removeCar = (id: number): void => {
     delCar(id);
