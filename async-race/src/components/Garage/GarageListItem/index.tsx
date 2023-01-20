@@ -33,16 +33,19 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     // to: { transform: "translateX(calc(100vw - 200px))" },
   }));
 
+  interface f {
+    id: number;
+    time: number;
+  }
+
+  const arrWinners: f[] = [];
+
   useEffect(() => {
     if (isRace) {
       setIsStop(true);
       start();
-    }
-    //else {
-    //   stop();
-    // }
+    }    
 
-    console.log(1);
   }, [isRace]);
 
   useEffect(() => {
@@ -52,22 +55,17 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     }
   }, [isReset]);
 
+
   const removeCar = (id: number): void => {
     delCar(id);
     setCountCars(countCars - 1);
   };
 
-  const startEngineCar = async () => {
-    const params = await startEngine(id);
-    setTime(params.distance / params.velocity);
-  };
-
   const start = async () => {
     setIsStop(true);
     const params = await startEngine(id);
-    //console.log(params);
-    startEngineCar();
-    //api.start({ transform: "translateX(calc(100vw - 200px))" });
+    console.log(params);
+    setTime(params.distance / params.velocity);
     const screenWidth = window.innerWidth - 220;
     api.start({ transform: `translateX(${screenWidth}px)` });
     setTimeout(() => {
@@ -83,7 +81,10 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
       //api.stop();
       const rect = nodeRef!.current!.getBoundingClientRect();
       api.set({ transform: `translateX(${rect.x - 60}px)` });
+    } else {
+      arrWinners.push({id: id, time: params.distance / params.velocity});
     }
+   console.log(arrWinners);
   };
 
   const carStyle = {
