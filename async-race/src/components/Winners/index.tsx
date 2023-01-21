@@ -11,13 +11,17 @@ import "./winners.scss";
 const Winners: FunctionComponent = () => {
   const pageWinners = localStorage.getItem("pageWinners");
   const pageNumber: number = pageWinners ? JSON.parse(pageWinners) : 1;
+  const orderWinners = localStorage.getItem("orderWinners");
+  const orderString: string = orderWinners ? JSON.parse(orderWinners) : "ASC";
+  const sortWinners = localStorage.getItem("sortWinners");
+  const sortString: string = sortWinners ? JSON.parse(sortWinners) : "id";
 
   const [countWinners, setCountWinners] = useState<number>(0);
   const [page, setPage] = useState<number>(pageNumber);
   const [winnersList, setWinnersList] = useState<IWinner[]>([]);
   const [carsList, setCarsList] = useState<ITableWinner[]>([]);
-  const [sort, setSort] = useState<string>("id");
-  const [order, setOrder] = useState<string>("ASC");
+  const [sort, setSort] = useState<string>(sortString);
+  const [order, setOrder] = useState<string>(orderString);
 
   const arrayWinners: ITableWinner[] = [];
   const MAX_PAGE = Math.ceil(countWinners / 10);
@@ -26,15 +30,14 @@ const Winners: FunctionComponent = () => {
 
   useEffect(() => {
     updateWinners(page, sort, order);
+    localStorage.setItem("pageWinners", JSON.stringify(page));
+    localStorage.setItem("orderWinners", JSON.stringify(order));
+    localStorage.setItem("sortWinners", JSON.stringify(sort));
   }, [page, sort, order]);
 
   useEffect(() => {
     createCarsList();
   }, [winnersList]);
-
-  useEffect(() => {
-    localStorage.setItem("pageWinners", JSON.stringify(page));
-  }, [page]);
 
   const updateWinners = async (
     page: number,
@@ -77,7 +80,6 @@ const Winners: FunctionComponent = () => {
   };
 
   const hadlerButtonWins = (): void => {
-    console.log(order);
     setSort("wins");
     setOrder(order === "ASD" ? "DESC" : "ASD");
   };

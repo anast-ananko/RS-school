@@ -28,6 +28,7 @@ const Control: FunctionComponent<IControl> = ({
 
   useEffect(() => {
     updateSelectedCar(selectedCar);
+    localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
   }, [selectedCar]);
 
   const updateSelectedCar = async (id: number | undefined): Promise<void> => {
@@ -62,6 +63,7 @@ const Control: FunctionComponent<IControl> = ({
     setIsUpdate(!isUpdate);
     setTitleUpdate("");
     setColorUpdate("#000000");
+    localStorage.removeItem("selectedCar");
   };
 
   const generateRandomCars = (): void => {

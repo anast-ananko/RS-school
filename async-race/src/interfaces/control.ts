@@ -1,7 +1,7 @@
 export interface IControl {
   countCars: number;
   setCountCars: (n: number) => void;
-  selectedCar: number | undefined;
+  selectedCar: number;
   isUpdate: boolean;
   setIsUpdate: (n: boolean) => void;
   setIsRace: (n: boolean) => void;
