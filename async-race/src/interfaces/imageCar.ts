@@ -3,4 +3,3 @@ export interface IImageCar {
   width: string;
   height: string;
 }
-  

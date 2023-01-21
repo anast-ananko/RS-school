@@ -1,7 +1,6 @@
-import { _apiBase } from "./apiBase";
-import { ICar } from "../interfaces/car";
 import { IWinner } from "../interfaces/winner";
 import { winnerCars } from "../types/winnerCars";
+import { _apiBase } from "./apiBase";
 
 const _apiWinners = `${_apiBase}/winners`;
 
@@ -13,12 +12,12 @@ const getSortOrder = (sort: string, order: string): string => {
   }
 };
 
-export async function getWinners(
+export const getWinners = async (
   page: number,
   sort: string,
   order: string,
   limit = 10
-): Promise<winnerCars> {
+): Promise<winnerCars> => {
   const responce: Response = await fetch(
     `${_apiWinners}?_page=${page}&_limit=${limit}${getSortOrder(sort, order)}`
   );
@@ -26,16 +25,16 @@ export async function getWinners(
   const count: string | null = responce.headers.get("X-Total-Count");
 
   return { winners, count };
-}
+};
 
-export async function getWinner(id: number): Promise<IWinner> {
+export const getWinner = async (id: number): Promise<IWinner> => {
   const responce: Response = await fetch(`${_apiWinners}/${id}`);
   const car: Promise<IWinner> = await responce.json();
 
   return car;
-}
+};
 
-export async function createWinner(body: IWinner): Promise<IWinner> {
+export const createWinner = async (body: IWinner): Promise<IWinner> => {
   const responce: Response = await fetch(_apiWinners, {
     method: "POST",
     body: JSON.stringify(body),
@@ -46,21 +45,21 @@ export async function createWinner(body: IWinner): Promise<IWinner> {
   const winner: Promise<IWinner> = await responce.json();
 
   return winner;
-}
+};
 
-export async function deleteWinner(id: number): Promise<IWinner> {
+export const deleteWinner = async (id: number): Promise<IWinner> => {
   const responce: Response = await fetch(`${_apiWinners}/${id}`, {
     method: "DELETE",
   });
   const winner: Promise<IWinner> = await responce.json();
 
   return winner;
-}
+};
 
-export async function updateWinner(
+export const updateWinner = async (
   id: number,
   body: IWinner
-): Promise<IWinner> {
+): Promise<IWinner> => {
   const responce: Response = await fetch(`${_apiWinners}/${id}`, {
     method: "PUT",
     body: JSON.stringify(body),
@@ -71,7 +70,7 @@ export async function updateWinner(
   const winner: Promise<IWinner> = await responce.json();
 
   return winner;
-}
+};
 
 const getWinnerStatus = async (id: number): Promise<number> => {
   const responce: Response = await fetch(`${_apiWinners}/${id}`);
@@ -87,7 +86,6 @@ export const saveWinner = async ({
   time: number;
 }) => {
   const winnerStatus = await getWinnerStatus(id);
-
   if (winnerStatus === 404) {
     await createWinner({
       id,
