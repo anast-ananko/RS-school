@@ -15,7 +15,7 @@ import "./garage.scss";
 const Garage: FunctionComponent = () => {
   const pageGarage = localStorage.getItem("pageGarage");
   const pageNumber: number = pageGarage ? JSON.parse(pageGarage) : 1;
-  const selCar = localStorage.getItem("selectedCar");  
+  const selCar = localStorage.getItem("selectedCar");
   const selCarNumber: number = selCar ? JSON.parse(selCar) : 0;
 
   const [countCars, setCountCars] = useState<number>(0);

@@ -21,8 +21,13 @@ const Control: FunctionComponent<IControl> = ({
   setIsReset,
   setIsWinner,
 }) => {
-  const [titleCreate, setTitleCreate] = useState<string>("");
-  const [colorCreate, setColorCreate] = useState<string>("");
+  const color = localStorage.getItem("colorCreate");
+  const colorString: string = color ? JSON.parse(color) : "";
+  const title = localStorage.getItem("titleCreate");
+  const titleString: string = title ? JSON.parse(title) : "";
+
+  const [titleCreate, setTitleCreate] = useState<string>(titleString);
+  const [colorCreate, setColorCreate] = useState<string>(colorString);
   const [titleUpdate, setTitleUpdate] = useState<string>("");
   const [colorUpdate, setColorUpdate] = useState<string>("");
 
@@ -38,6 +43,11 @@ const Control: FunctionComponent<IControl> = ({
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("colorCreate", JSON.stringify(colorCreate));
+    localStorage.setItem("titleCreate", JSON.stringify(titleCreate));
+  }, [titleCreate, colorCreate]);
+
   const onCarLoaded = (car: ICar): void => {
     setTitleUpdate(car.name);
     setColorUpdate(car.color);
@@ -50,6 +60,8 @@ const Control: FunctionComponent<IControl> = ({
     setCountCars(countCars + 1);
     setTitleCreate("");
     setColorCreate("#000000");
+    localStorage.removeItem("colorCreate");
+    localStorage.removeItem("titleCreate");
   };
 
   const updCar = (): void => {
