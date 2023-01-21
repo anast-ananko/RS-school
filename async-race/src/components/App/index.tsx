@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import logo from "./logo.svg";
 
 import Header from "../Header";
 import Garage from "../Garage";
