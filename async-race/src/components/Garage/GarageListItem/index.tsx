@@ -22,7 +22,6 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   isReset,
   setWinnerInRace,
   setIsWinner,
-  isWinner,
 }) => {
   const [time, setTime] = useState<number>(0);
   const [isStop, setIsStop] = useState<boolean>(false);
@@ -31,6 +30,9 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   const myRef = React.useRef<HTMLDivElement>(null);
 
   const [animationProps, api] = useSpring(() => ({}));
+
+  const OFFSET_RIGHT: number = 220;
+  const CAR_WIDTH: number = 65;
 
   useEffect(() => {
     if (isRace) {
@@ -57,13 +59,13 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     const params = await startEngine(id);
     setTime(params.distance / params.velocity);
 
-    const screenWidth = window.innerWidth - 220;
+    const screenWidth = window.innerWidth - OFFSET_RIGHT;
     api.start({ transform: `translateX(${screenWidth}px)` });
 
     const res = await drive(id);
     if (!res.success) {
       const rect = nodeRef!.current!.getBoundingClientRect();
-      api.set({ transform: `translateX(${rect.x - 65}px)` });
+      api.set({ transform: `translateX(${rect.x - CAR_WIDTH}px)` });
       stopEngine(id);
     } else {
       setWinnerInRace({
@@ -74,16 +76,16 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
       setIsWinner(true);
       stopEngine(id);
     }
-  };
-
-  const carStyle = {
-    transitionDuration: `${time}ms`,
-  };
+  };  
 
   const stop = (): void => {
     api.set({ transform: "translateX(0px)" });
     setIsStop(false);
     stopEngine(id);
+  };
+
+  const carStyle = {
+    transitionDuration: `${time}ms`,
   };
 
   return (

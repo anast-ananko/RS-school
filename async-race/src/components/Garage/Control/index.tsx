@@ -19,7 +19,6 @@ const Control: FunctionComponent<IControl> = ({
   setIsUpdate,
   setIsRace,
   setIsReset,
-  setIsWinner,
 }) => {
   const color = localStorage.getItem("colorCreate");
   const colorString: string = color ? JSON.parse(color) : "";
@@ -36,17 +35,17 @@ const Control: FunctionComponent<IControl> = ({
     localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
   }, [selectedCar]);
 
+  useEffect(() => {
+    localStorage.setItem("colorCreate", JSON.stringify(colorCreate));
+    localStorage.setItem("titleCreate", JSON.stringify(titleCreate));
+  }, [titleCreate, colorCreate]);
+
   const updateSelectedCar = async (id: number | undefined): Promise<void> => {
     if (typeof id === "number") {
       const car = await getCar(id);
       onCarLoaded(car);
     }
-  };
-
-  useEffect(() => {
-    localStorage.setItem("colorCreate", JSON.stringify(colorCreate));
-    localStorage.setItem("titleCreate", JSON.stringify(titleCreate));
-  }, [titleCreate, colorCreate]);
+  }; 
 
   const onCarLoaded = (car: ICar): void => {
     setTitleUpdate(car.name);
@@ -101,12 +100,12 @@ const Control: FunctionComponent<IControl> = ({
     setColorUpdate(e.target.value);
   };
 
-  const race = () => {
+  const race = (): void => {
     setIsReset(false);
     setIsRace(true);
   };
 
-  const reset = () => {
+  const reset = (): void => {
     setIsReset(true);
     setIsRace(false);
   };

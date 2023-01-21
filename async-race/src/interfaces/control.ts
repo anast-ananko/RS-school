@@ -6,5 +6,4 @@ export interface IControl {
   setIsUpdate: (n: boolean) => void;
   setIsRace: (n: boolean) => void;
   setIsReset: (n: boolean) => void;
-  setIsWinner: (n: boolean) => void;
 }

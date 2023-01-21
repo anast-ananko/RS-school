@@ -94,7 +94,6 @@ const Garage: FunctionComponent = () => {
         selectedCar={selectedCar}
         setIsRace={setIsRace}
         setIsReset={setIsReset}
-        setIsWinner={setIsWinner}
       />
       <h2 className="garage__title">Garage ({countCars})</h2>
       <h4 className="garage__page">Page # {page}</h4>
@@ -108,7 +107,6 @@ const Garage: FunctionComponent = () => {
         isReset={isReset}
         setWinnerInRace={setWinnerInRace}
         setIsWinner={setIsWinner}
-        isWinner={isWinner}
       />
       <div className="car__pagination">
         <button

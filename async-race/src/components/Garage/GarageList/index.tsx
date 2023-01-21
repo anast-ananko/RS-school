@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FunctionComponent } from "react";
 
 import GarageListItem from "../GarageListItem";
@@ -17,7 +16,6 @@ const GarageList: FunctionComponent<IGarageList> = ({
   isReset,
   setWinnerInRace,
   setIsWinner,
-  isWinner,
 }) => {
   return (
     <div className="garage">
@@ -36,7 +34,6 @@ const GarageList: FunctionComponent<IGarageList> = ({
           isReset={isReset}
           setWinnerInRace={setWinnerInRace}
           setIsWinner={setIsWinner}
-          isWinner={isWinner}
         />
       ))}
     </div>

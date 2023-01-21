@@ -1,4 +1,4 @@
-import { useState, FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import ReactDOM from "react-dom";
 
 import { IModal } from "../../interfaces/modal";
