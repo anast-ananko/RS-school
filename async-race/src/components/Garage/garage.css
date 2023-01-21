@@ -1,6 +1,7 @@
 .garage__title {
   color: white;
   font-size: 28px;
+  margin-left: 20px;
 }
 
 .garage__page {
@@ -8,10 +9,13 @@
   font-size: 24px;
   margin-top: 10px;
   margin-bottom: 15px;
+  margin-left: 20px;
 }
 
 .car__pagination {
   margin-top: 50px;
+  margin-left: 20px;
+  margin-bottom: 30px;
 }
 .car__pagination > * {
   width: 70px;

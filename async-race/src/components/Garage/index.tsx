@@ -44,12 +44,18 @@ const Garage: FunctionComponent = () => {
   };
 
   const prevPage = (): void => {
+    setIsRace(false);
+    setIsReset(false);
+    setIsWinner(false);
     if (page > MIN_PAGE) {
       setPage(page - 1);
     }
   };
 
   const nextPage = (): void => {
+    setIsRace(false);
+    setIsReset(false);
+    setIsWinner(false);
     if (page < MAX_PAGE) setPage(page + 1);
   };
 
@@ -81,6 +87,7 @@ const Garage: FunctionComponent = () => {
         selectedCar={selectedCar}
         setIsRace={setIsRace}
         setIsReset={setIsReset}
+        setIsWinner={setIsWinner}
       />
       <h2 className="garage__title">Garage ({countCars})</h2>
       <h4 className="garage__page">Page # {page}</h4>
@@ -94,6 +101,7 @@ const Garage: FunctionComponent = () => {
         isReset={isReset}
         setWinnerInRace={setWinnerInRace}
         setIsWinner={setIsWinner}
+        isWinner={isWinner}
       />
       <div className="car__pagination">
         <button

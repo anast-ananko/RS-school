@@ -19,9 +19,13 @@ const Winners = () => {
 
   const arrayWinners: ITableWinner[] = [];
 
+  const MAX_PAGE = Math.ceil(countWinners / 10);
+  const MIN_PAGE = 1;
+  const LIMIT_FOR_PAGE = 10;
+
   useEffect(() => {
     updateWinners(page, sort, order);
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     createCarsList();
@@ -59,18 +63,15 @@ const Winners = () => {
     setCarsList(arrayWinners);
   };
 
-  // const createCarsList = (winners: IWinner[]) => {
-  //   return winners.map((item, i) => {
-  //     return getCurrentCar(item.id).then((car) => {
-  //       return {
-  //         ...item,
-  //         i: i,
-  //         name: car.name,
-  //         color: car.color,
-  //       };
-  //     });
-  //   });
-  // };
+  const prevPage = (): void => {
+    if (page > MIN_PAGE) {
+      setPage(page - 1);
+    }
+  };
+
+  const nextPage = (): void => {
+    if (page < MAX_PAGE) setPage(page + 1);
+  };
 
   return (
     <div className="winners">
@@ -88,7 +89,7 @@ const Winners = () => {
           {carsList.map((item) => {
             return (
               <tr key={item.i}>
-                <th>{item.i + 1}</th>
+                <th>{item.i + 1 + LIMIT_FOR_PAGE * (page - 1)}</th>
                 <th>{item.color}</th>
                 <th>{item.name}</th>
                 <th>{item.wins}</th>
@@ -99,8 +100,20 @@ const Winners = () => {
         </tbody>
       </table>
       <div className="car__pagination">
-        <button className="button__prev">Prev</button>
-        <button className="button__next">Next</button>
+        <button
+          className="button__prev"
+          onClick={() => prevPage()}
+          disabled={page === MIN_PAGE ? true : false}
+        >
+          Prev
+        </button>
+        <button
+          className="button__next"
+          onClick={() => nextPage()}
+          disabled={page === MAX_PAGE ? true : false}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

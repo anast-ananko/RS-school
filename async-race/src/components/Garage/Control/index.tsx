@@ -19,6 +19,7 @@ const Control: FunctionComponent<IControl> = ({
   setIsUpdate,
   setIsRace,
   setIsReset,
+  setIsWinner,
 }) => {
   const [titleCreate, setTitleCreate] = useState<string>("");
   const [colorCreate, setColorCreate] = useState<string>("");
@@ -94,6 +95,8 @@ const Control: FunctionComponent<IControl> = ({
   const reset = () => {
     setIsReset(true);
     setIsRace(false);
+    //bag
+    setIsWinner(false);
   };
 
   return (

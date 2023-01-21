@@ -22,6 +22,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   isReset,
   setWinnerInRace,
   setIsWinner,
+  isWinner,
 }) => {
   const [time, setTime] = useState<number>(0);
   const [isStop, setIsStop] = useState<boolean>(false);
@@ -74,7 +75,9 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
         name: name,
         time: +(params.distance / params.velocity / 1000).toFixed(2),
       });
-      setIsWinner(true);
+      if (!isWinner) {
+        setIsWinner(true);
+      }
     }
   };
 
