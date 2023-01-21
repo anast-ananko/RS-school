@@ -6,6 +6,7 @@ import { ITableWinner } from "../../interfaces/tableWinner";
 import { ICar } from "../../interfaces/car";
 import { getCar } from "../../services/apiGarage";
 import { getWinners } from "../../services/apiWinners";
+import ImageCar from "../ImageCar";
 
 import "./winners.scss";
 
@@ -90,7 +91,9 @@ const Winners = () => {
             return (
               <tr key={item.i}>
                 <th>{item.i + 1 + LIMIT_FOR_PAGE * (page - 1)}</th>
-                <th>{item.color}</th>
+                <th>
+                  <ImageCar color={item.color} width="65" height="35" />
+                </th>
                 <th>{item.name}</th>
                 <th>{item.wins}</th>
                 <th>{item.time}</th>
