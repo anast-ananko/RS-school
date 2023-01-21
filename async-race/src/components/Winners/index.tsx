@@ -1,16 +1,14 @@
-import { useState, useEffect } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { useState, useEffect, FunctionComponent } from "react";
 
+import ImageCar from "../ImageCar";
 import { IWinner } from "../../interfaces/winner";
 import { ITableWinner } from "../../interfaces/tableWinner";
-import { ICar } from "../../interfaces/car";
 import { getCar } from "../../services/apiGarage";
 import { getWinners } from "../../services/apiWinners";
-import ImageCar from "../ImageCar";
 
 import "./winners.scss";
 
-const Winners = () => {
+const Winners: FunctionComponent = () => {
   const [countWinners, setCountWinners] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
   const [winnersList, setWinnersList] = useState<IWinner[]>([]);
@@ -26,7 +24,7 @@ const Winners = () => {
 
   useEffect(() => {
     updateWinners(page, sort, order);
-  }, [page]);
+  }, [page, sort, order]);
 
   useEffect(() => {
     createCarsList();
@@ -48,11 +46,9 @@ const Winners = () => {
     setWinnersList(winners);
   };
 
-  const createCarsList = async () => {
-    console.log(winnersList.length);
+  const createCarsList = async (): Promise<void> => {
     for (let i = 0; i < winnersList.length; i++) {
       const car = await getCar(winnersList[i].id);
-      console.log(car);
       arrayWinners[i] = {
         i: i,
         name: car.name,
@@ -74,6 +70,17 @@ const Winners = () => {
     if (page < MAX_PAGE) setPage(page + 1);
   };
 
+  const hadlerButtonWins = (): void => {
+    console.log(order);
+    setSort("wins");
+    setOrder(order === "ASD" ? "DESC" : "ASD");
+  };
+
+  const hadlerButtonTimes = (): void => {
+    setSort("time");
+    setOrder(order === "ASD" ? "DESC" : "ASD");
+  };
+
   return (
     <div className="winners">
       <h2 className="winners__title">Winners ({countWinners})</h2>
@@ -84,8 +91,22 @@ const Winners = () => {
             <th>Number</th>
             <th>Car</th>
             <th>Name</th>
-            <th>Wins</th>
-            <th>Best time (seconds)</th>
+            <th>
+              <button
+                className="button-wins"
+                onClick={() => hadlerButtonWins()}
+              >
+                Wins
+              </button>
+            </th>
+            <th>
+              <button
+                className="button-times"
+                onClick={() => hadlerButtonTimes()}
+              >
+                Best time (seconds)
+              </button>
+            </th>
           </tr>
           {carsList.map((item) => {
             return (
