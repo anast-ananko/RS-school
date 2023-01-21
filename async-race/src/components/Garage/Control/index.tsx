@@ -45,7 +45,7 @@ const Control: FunctionComponent<IControl> = ({
       const car = await getCar(id);
       onCarLoaded(car);
     }
-  }; 
+  };
 
   const onCarLoaded = (car: ICar): void => {
     setTitleUpdate(car.name);
@@ -64,7 +64,6 @@ const Control: FunctionComponent<IControl> = ({
   };
 
   const updCar = (): void => {
-    console.log(selectedCar);
     if (typeof selectedCar === "number") {
       updateCar(selectedCar, {
         name: titleUpdate,

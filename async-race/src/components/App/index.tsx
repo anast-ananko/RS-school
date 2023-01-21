@@ -1,4 +1,4 @@
-import { FunctionComponent }from "react";
+import { FunctionComponent } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import logo from "./logo.svg";
 

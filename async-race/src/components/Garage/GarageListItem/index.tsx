@@ -31,8 +31,8 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
 
   const [animationProps, api] = useSpring(() => ({}));
 
-  const OFFSET_RIGHT: number = 220;
-  const CAR_WIDTH: number = 65;
+  const OFFSET_RIGHT = 220;
+  const CAR_WIDTH = 65;
 
   useEffect(() => {
     if (isRace) {
@@ -76,7 +76,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
       setIsWinner(true);
       stopEngine(id);
     }
-  };  
+  };
 
   const stop = (): void => {
     api.set({ transform: "translateX(0px)" });
