@@ -43,7 +43,9 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     if (isReset) {
       setIsStop(false);
       stop();
+      //bag
       setIsWinner(false);
+      //setIsWinner(false);
     }
   }, [isReset]);
 
@@ -60,15 +62,16 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
 
     const screenWidth = window.innerWidth - 220;
     api.start({ transform: `translateX(${screenWidth}px)` });
-    setTimeout(() => {
-      console.log("done");
-      stopEngine(id);
-    }, params.distance / params.velocity);
+    // setTimeout(() => {
+    //   console.log("done");
+    //   stopEngine(id);
+    // }, params.distance / params.velocity);
 
     const res = await drive(id);
     if (!res.success) {
       const rect = nodeRef!.current!.getBoundingClientRect();
       api.set({ transform: `translateX(${rect.x - 65}px)` });
+      stopEngine(id);
     } else {
       setWinnerInRace({
         id: id,
@@ -78,6 +81,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
       if (!isWinner) {
         setIsWinner(true);
       }
+      stopEngine(id);
     }
   };
 

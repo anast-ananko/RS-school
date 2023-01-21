@@ -96,7 +96,7 @@ const Control: FunctionComponent<IControl> = ({
     setIsReset(true);
     setIsRace(false);
     //bag
-    setIsWinner(false);
+    //setIsWinner(false);
   };
 
   return (

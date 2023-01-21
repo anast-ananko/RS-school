@@ -13,11 +13,20 @@ import { deleteWinner } from "../../services/apiWinners";
 import "./garage.scss";
 
 const Garage: FunctionComponent = () => {
+  const pageGarage = localStorage.getItem("pageGarage");
+  const pageNumber: number = pageGarage ? JSON.parse(pageGarage) : 1;
+
   const [countCars, setCountCars] = useState<number>(0);
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(pageNumber);
   const [garageList, setGarageList] = useState<ICar[]>([]);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [selectedCar, setSelectedCar] = useState<number>();
+  const [isRace, setIsRace] = useState<boolean>(false);
+  const [isReset, setIsReset] = useState<boolean>(false);
+  const [isWinner, setIsWinner] = useState<boolean>(false);
+  const [winner, setWinner] = useState<IWinnerRace>();
+  const [winnerInRace, setWinnerInRace] = useState<IWinnerRace>();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const MAX_PAGE = Math.ceil(countCars / 7);
   const MIN_PAGE = 1;
@@ -25,6 +34,20 @@ const Garage: FunctionComponent = () => {
   useEffect(() => {
     updateGarage(page);
   }, [countCars, isUpdate, page]);
+
+  useEffect(() => {
+    if (isWinner) {
+      setWinner(winnerInRace);
+      setShowModal(true);
+      if (winnerInRace) {
+        saveWinner(winnerInRace);
+      }
+    }
+  }, [isWinner]);
+
+  useEffect(() => {
+    localStorage.setItem("pageGarage", JSON.stringify(page));
+  }, [page]);
 
   const updateGarage = async (page: number): Promise<void> => {
     const { cars, count } = await getCars(page);
@@ -58,24 +81,6 @@ const Garage: FunctionComponent = () => {
     setIsWinner(false);
     if (page < MAX_PAGE) setPage(page + 1);
   };
-
-  const [isRace, setIsRace] = useState<boolean>(false);
-  const [isReset, setIsReset] = useState<boolean>(false);
-  const [isWinner, setIsWinner] = useState<boolean>(false);
-  const [winner, setWinner] = useState<IWinnerRace>();
-  const [showModal, setShowModal] = useState<boolean>(false);
-
-  const [winnerInRace, setWinnerInRace] = useState<IWinnerRace>();
-
-  useEffect(() => {
-    if (isWinner) {
-      setWinner(winnerInRace);
-      setShowModal(true);
-      if (winnerInRace) {
-        saveWinner(winnerInRace);
-      }
-    }
-  }, [isWinner]);
 
   return (
     <>

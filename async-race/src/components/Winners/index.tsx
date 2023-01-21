@@ -9,8 +9,11 @@ import { getWinners } from "../../services/apiWinners";
 import "./winners.scss";
 
 const Winners: FunctionComponent = () => {
+  const pageWinners = localStorage.getItem("pageWinners");
+  const pageNumber: number = pageWinners ? JSON.parse(pageWinners) : 1;
+
   const [countWinners, setCountWinners] = useState<number>(0);
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(pageNumber);
   const [winnersList, setWinnersList] = useState<IWinner[]>([]);
   const [carsList, setCarsList] = useState<ITableWinner[]>([]);
   const [sort, setSort] = useState<string>("id");
@@ -29,6 +32,10 @@ const Winners: FunctionComponent = () => {
   useEffect(() => {
     createCarsList();
   }, [winnersList]);
+
+  useEffect(() => {
+    localStorage.setItem("pageWinners", JSON.stringify(page));
+  }, [page]);
 
   const updateWinners = async (
     page: number,
