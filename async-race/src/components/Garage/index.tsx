@@ -1,5 +1,7 @@
 import { useState, useEffect, FunctionComponent } from "react";
 
+import Modal from "../Modal";
+import { IWinnerRace } from "../../interfaces/winnerRace";
 import Control from "./Control";
 import GarageList from "./GarageList";
 import { getCars } from "../../services/apiGarage";
@@ -54,6 +56,20 @@ const Garage: FunctionComponent = () => {
 
   const [isRace, setIsRace] = useState<boolean>(false);
   const [isReset, setIsReset] = useState<boolean>(false);
+  const [inn, setInn] = useState<number>(0);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [isWinner, setIsWinner] = useState<boolean>(false);
+  const [winnerId, setWinnerId] = useState<number>(0);
+
+  const arrWinners: IWinnerRace[] = [];
+
+  useEffect(() => {
+    if (isWinner) {
+      setWinnerId(inn);
+      setShowModal(true);
+    }
+    
+  }, [isWinner]);
 
   return (
     <>
@@ -76,6 +92,9 @@ const Garage: FunctionComponent = () => {
         setSelectedCar={setSelectedCar}
         isRace={isRace}
         isReset={isReset}
+        arrWinners={arrWinners}
+        setInn={setInn}
+        setIsWinner={setIsWinner}
       />
       <div className="car__pagination">
         <button
@@ -93,6 +112,7 @@ const Garage: FunctionComponent = () => {
           Next
         </button>
       </div>
+      <Modal onClose={() => setShowModal(false)} show={showModal} inn={winnerId} />
     </>
   );
 };

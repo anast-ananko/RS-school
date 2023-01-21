@@ -9,7 +9,6 @@ import { stopEngine } from "../../../services/apiEngine";
 import { drive } from "../../../services/apiEngine";
 
 import "./garageListItem.scss";
-import { timeEnd } from "console";
 
 const GarageListItem: FunctionComponent<IGarageListItem> = ({
   name,
@@ -21,6 +20,9 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   setSelectedCar,
   isRace,
   isReset,
+  arrWinners,
+  setInn,
+  setIsWinner
 }) => {
   const [time, setTime] = useState<number>(0);
   const [isStop, setIsStop] = useState<boolean>(false);
@@ -33,28 +35,20 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     // to: { transform: "translateX(calc(100vw - 200px))" },
   }));
 
-  interface f {
-    id: number;
-    time: number;
-  }
-
-  const arrWinners: f[] = [];
-
   useEffect(() => {
     if (isRace) {
       setIsStop(true);
       start();
-    }    
-
+    }
   }, [isRace]);
 
   useEffect(() => {
     if (isReset) {
       setIsStop(false);
       stop();
+      setIsWinner(false);
     }
   }, [isReset]);
-
 
   const removeCar = (id: number): void => {
     delCar(id);
@@ -66,6 +60,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     const params = await startEngine(id);
     console.log(params);
     setTime(params.distance / params.velocity);
+
     const screenWidth = window.innerWidth - 220;
     api.start({ transform: `translateX(${screenWidth}px)` });
     setTimeout(() => {
@@ -80,11 +75,12 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
       // почему-то не работает
       //api.stop();
       const rect = nodeRef!.current!.getBoundingClientRect();
-      api.set({ transform: `translateX(${rect.x - 60}px)` });
+      api.set({ transform: `translateX(${rect.x - 65}px)` });
     } else {
-      arrWinners.push({id: id, time: params.distance / params.velocity});
+      setInn(id);
+      setIsWinner(true);
     }
-   console.log(arrWinners);
+    // console.log(arrWinners);
   };
 
   const carStyle = {

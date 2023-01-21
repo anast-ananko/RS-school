@@ -1,3 +1,5 @@
+import { IWinnerRace } from "./winnerRace";
+
 export interface IGarageListItem {
   name: string;
   color: string;
@@ -9,4 +11,7 @@ export interface IGarageListItem {
   index: number;
   isRace: boolean;
   isReset: boolean;
+  arrWinners: IWinnerRace[];
+  setInn: (n: number) => void;
+  setIsWinner:(n: boolean) => void;
 }
