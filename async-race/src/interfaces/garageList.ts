@@ -9,7 +9,6 @@ export interface IGarageList {
   setSelectedCar: (id: number) => void;
   isRace: boolean;
   isReset: boolean;
-  arrWinners: IWinnerRace[];
-  setInn: (n: number) => void;
-  setIsWinner:(n: boolean) => void;
+  setWinnerInRace: (n: IWinnerRace) => void;
+  setIsWinner: (n: boolean) => void;
 }

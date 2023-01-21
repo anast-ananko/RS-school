@@ -1,5 +1,7 @@
+import { IWinnerRace } from "./winnerRace";
+
 export interface IModal {
   onClose: () => void;
   show: boolean;
-  inn: number;
+  winner: IWinnerRace | undefined;
 }

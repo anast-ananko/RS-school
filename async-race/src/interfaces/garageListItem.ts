@@ -11,7 +11,6 @@ export interface IGarageListItem {
   index: number;
   isRace: boolean;
   isReset: boolean;
-  arrWinners: IWinnerRace[];
-  setInn: (n: number) => void;
-  setIsWinner:(n: boolean) => void;
+  setWinnerInRace: (n: IWinnerRace) => void;
+  setIsWinner: (n: boolean) => void;
 }

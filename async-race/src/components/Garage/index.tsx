@@ -56,19 +56,17 @@ const Garage: FunctionComponent = () => {
 
   const [isRace, setIsRace] = useState<boolean>(false);
   const [isReset, setIsReset] = useState<boolean>(false);
-  const [inn, setInn] = useState<number>(0);
-  const [showModal, setShowModal] = useState<boolean>(false);
   const [isWinner, setIsWinner] = useState<boolean>(false);
-  const [winnerId, setWinnerId] = useState<number>(0);
+  const [winner, setWinner] = useState<IWinnerRace>();
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  const arrWinners: IWinnerRace[] = [];
+  const [winnerInRace, setWinnerInRace] = useState<IWinnerRace>();
 
   useEffect(() => {
     if (isWinner) {
-      setWinnerId(inn);
+      setWinner(winnerInRace);
       setShowModal(true);
     }
-    
   }, [isWinner]);
 
   return (
@@ -92,8 +90,7 @@ const Garage: FunctionComponent = () => {
         setSelectedCar={setSelectedCar}
         isRace={isRace}
         isReset={isReset}
-        arrWinners={arrWinners}
-        setInn={setInn}
+        setWinnerInRace={setWinnerInRace}
         setIsWinner={setIsWinner}
       />
       <div className="car__pagination">
@@ -112,7 +109,11 @@ const Garage: FunctionComponent = () => {
           Next
         </button>
       </div>
-      <Modal onClose={() => setShowModal(false)} show={showModal} inn={winnerId} />
+      <Modal
+        onClose={() => setShowModal(false)}
+        show={showModal}
+        winner={winner}
+      />
     </>
   );
 };

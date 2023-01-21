@@ -20,9 +20,8 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   setSelectedCar,
   isRace,
   isReset,
-  arrWinners,
-  setInn,
-  setIsWinner
+  setWinnerInRace,
+  setIsWinner,
 }) => {
   const [time, setTime] = useState<number>(0);
   const [isStop, setIsStop] = useState<boolean>(false);
@@ -30,10 +29,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   const nodeRef = React.useRef<HTMLDivElement>(null);
   const myRef = React.useRef<HTMLDivElement>(null);
 
-  const [animationProps, api] = useSpring(() => ({
-    // from: { transform: "translateX(0)" },
-    // to: { transform: "translateX(calc(100vw - 200px))" },
-  }));
+  const [animationProps, api] = useSpring(() => ({}));
 
   useEffect(() => {
     if (isRace) {
@@ -70,17 +66,16 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
 
     const res = await drive(id);
     if (!res.success) {
-      // работает, но в начальное положение не надо скидывать
-      //api.set({ transform: "translateX(0px)" });
-      // почему-то не работает
-      //api.stop();
       const rect = nodeRef!.current!.getBoundingClientRect();
       api.set({ transform: `translateX(${rect.x - 65}px)` });
     } else {
-      setInn(id);
+      setWinnerInRace({
+        id: id,
+        name: name,
+        time: +(params.distance / params.velocity).toFixed(2),
+      });
       setIsWinner(true);
     }
-    // console.log(arrWinners);
   };
 
   const carStyle = {
