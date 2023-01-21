@@ -34,6 +34,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
 
   useEffect(() => {
     if (isRace) {
+      setIsWinner(false);
       setIsStop(true);
       start();
     }
@@ -43,9 +44,6 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     if (isReset) {
       setIsStop(false);
       stop();
-      //bag
-      setIsWinner(false);
-      //setIsWinner(false);
     }
   }, [isReset]);
 
@@ -54,18 +52,13 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     setCountCars(countCars - 1);
   };
 
-  const start = async () => {
+  const start = async (): Promise<void> => {
     setIsStop(true);
     const params = await startEngine(id);
-    console.log(params);
     setTime(params.distance / params.velocity);
 
     const screenWidth = window.innerWidth - 220;
     api.start({ transform: `translateX(${screenWidth}px)` });
-    // setTimeout(() => {
-    //   console.log("done");
-    //   stopEngine(id);
-    // }, params.distance / params.velocity);
 
     const res = await drive(id);
     if (!res.success) {
@@ -78,9 +71,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
         name: name,
         time: +(params.distance / params.velocity / 1000).toFixed(2),
       });
-      if (!isWinner) {
-        setIsWinner(true);
-      }
+      setIsWinner(true);
       stopEngine(id);
     }
   };
@@ -89,9 +80,10 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
     transitionDuration: `${time}ms`,
   };
 
-  const stop = () => {
+  const stop = (): void => {
     api.set({ transform: "translateX(0px)" });
     setIsStop(false);
+    stopEngine(id);
   };
 
   return (

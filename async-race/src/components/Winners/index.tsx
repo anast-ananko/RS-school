@@ -20,7 +20,6 @@ const Winners: FunctionComponent = () => {
   const [order, setOrder] = useState<string>("ASC");
 
   const arrayWinners: ITableWinner[] = [];
-
   const MAX_PAGE = Math.ceil(countWinners / 10);
   const MIN_PAGE = 1;
   const LIMIT_FOR_PAGE = 10;

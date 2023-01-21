@@ -36,7 +36,7 @@ const Garage: FunctionComponent = () => {
   }, [countCars, isUpdate, page]);
 
   useEffect(() => {
-    if (isWinner) {
+    if (isWinner && isRace) {
       setWinner(winnerInRace);
       setShowModal(true);
       if (winnerInRace) {

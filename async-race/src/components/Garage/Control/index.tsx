@@ -23,7 +23,6 @@ const Control: FunctionComponent<IControl> = ({
 }) => {
   const [titleCreate, setTitleCreate] = useState<string>("");
   const [colorCreate, setColorCreate] = useState<string>("");
-
   const [titleUpdate, setTitleUpdate] = useState<string>("");
   const [colorUpdate, setColorUpdate] = useState<string>("");
 
@@ -65,10 +64,11 @@ const Control: FunctionComponent<IControl> = ({
     setColorUpdate("#000000");
   };
 
-  const generateRandomCars = () => {
+  const generateRandomCars = (): void => {
     for (let i = 0; i < 100; i++) {
       createCar({ name: generateRandomName(), color: generateRandomColor() });
     }
+    setCountCars(countCars + 100);
   };
 
   const titleCreateHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -95,8 +95,6 @@ const Control: FunctionComponent<IControl> = ({
   const reset = () => {
     setIsReset(true);
     setIsRace(false);
-    //bag
-    //setIsWinner(false);
   };
 
   return (
