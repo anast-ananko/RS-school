@@ -72,7 +72,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
       setWinnerInRace({
         id: id,
         name: name,
-        time: +(params.distance / params.velocity).toFixed(2),
+        time: +(params.distance / params.velocity / 1000).toFixed(2),
       });
       setIsWinner(true);
     }

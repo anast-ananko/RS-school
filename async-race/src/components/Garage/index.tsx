@@ -7,6 +7,8 @@ import GarageList from "./GarageList";
 import { getCars } from "../../services/apiGarage";
 import { ICar } from "../../interfaces/car";
 import { deleteCar } from "../../services/apiGarage";
+import { saveWinner } from "../../services/apiWinners";
+import { deleteWinner } from "../../services/apiWinners";
 
 import "./garage.scss";
 
@@ -38,11 +40,8 @@ const Garage: FunctionComponent = () => {
 
   const delCar = async (id: number): Promise<void> => {
     await deleteCar(id);
+    await deleteWinner(id);
   };
-
-  // const selectCar = (id: number): void => {
-  //   setSelectedCar(id);
-  // };
 
   const prevPage = (): void => {
     if (page > MIN_PAGE) {
@@ -66,6 +65,9 @@ const Garage: FunctionComponent = () => {
     if (isWinner) {
       setWinner(winnerInRace);
       setShowModal(true);
+      if (winnerInRace) {
+        saveWinner(winnerInRace);
+      }
     }
   }, [isWinner]);
 
