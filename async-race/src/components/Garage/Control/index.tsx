@@ -25,14 +25,14 @@ const Control: FunctionComponent<IControl> = ({
   setIsResetDisabled,
 }) => {
   const color = localStorage.getItem("colorCreate");
-  const colorString: string = color ? JSON.parse(color) : "";
+  const colorString: string = color ? JSON.parse(color) : "#ffffff";
   const title = localStorage.getItem("titleCreate");
   const titleString: string = title ? JSON.parse(title) : "";
 
   const [titleCreate, setTitleCreate] = useState<string>(titleString);
   const [colorCreate, setColorCreate] = useState<string>(colorString);
   const [titleUpdate, setTitleUpdate] = useState<string>("");
-  const [colorUpdate, setColorUpdate] = useState<string>("");
+  const [colorUpdate, setColorUpdate] = useState<string>("#ffffff");
 
   useEffect(() => {
     updateSelectedCar(selectedCar);
