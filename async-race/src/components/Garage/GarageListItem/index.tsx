@@ -64,6 +64,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
 
     const res = await drive(id);
     if (!res.success) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const rect = nodeRef!.current!.getBoundingClientRect();
       api.set({ transform: `translateX(${rect.x - CAR_WIDTH}px)` });
       stopEngine(id);
