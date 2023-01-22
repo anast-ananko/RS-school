@@ -19,6 +19,10 @@ const Control: FunctionComponent<IControl> = ({
   setIsUpdate,
   setIsRace,
   setIsReset,
+  isRaceDisabled,
+  isResetDisabled,
+  setIsRaceDisabled,
+  setIsResetDisabled,
 }) => {
   const color = localStorage.getItem("colorCreate");
   const colorString: string = color ? JSON.parse(color) : "";
@@ -102,11 +106,14 @@ const Control: FunctionComponent<IControl> = ({
   const race = (): void => {
     setIsReset(false);
     setIsRace(true);
+    setIsRaceDisabled(true);
   };
 
   const reset = (): void => {
     setIsReset(true);
     setIsRace(false);
+    setIsRaceDisabled(false);
+    setIsResetDisabled(true);
   };
 
   return (
@@ -154,10 +161,18 @@ const Control: FunctionComponent<IControl> = ({
         </button>
       </div>
       <div className="buttons">
-        <button className="race-button" onClick={race}>
+        <button
+          className="race-button"
+          onClick={race}
+          disabled={isRaceDisabled ? true : false}
+        >
           Race
         </button>
-        <button className="reset-button" onClick={reset}>
+        <button
+          className="reset-button"
+          onClick={reset}
+          disabled={isResetDisabled ? true : false}
+        >
           Reset
         </button>
         <button className="generate-button" onClick={generateRandomCars}>

@@ -6,4 +6,8 @@ export interface IControl {
   setIsUpdate: (n: boolean) => void;
   setIsRace: (n: boolean) => void;
   setIsReset: (n: boolean) => void;
+  isRaceDisabled: boolean;
+  isResetDisabled: boolean;
+  setIsRaceDisabled: (n: boolean) => void;
+  setIsResetDisabled: (n: boolean) => void;
 }

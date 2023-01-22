@@ -21,8 +21,6 @@ const Garage: FunctionComponent = () => {
     selCarNumber = JSON.parse(selCar);
   }
 
-  //const selCarNumber: number = selCar ? JSON.parse(selCar) : 0;
-
   const [countCars, setCountCars] = useState<number>(0);
   const [page, setPage] = useState<number>(pageNumber);
   const [garageList, setGarageList] = useState<ICar[]>([]);
@@ -30,6 +28,8 @@ const Garage: FunctionComponent = () => {
   const [selectedCar, setSelectedCar] = useState<number>(selCarNumber);
   const [isRace, setIsRace] = useState<boolean>(false);
   const [isReset, setIsReset] = useState<boolean>(false);
+  const [isRaceDisabled, setIsRaceDisabled] = useState<boolean>(false);
+  const [isResetDisabled, setIsResetDisabled] = useState<boolean>(true);
   const [isWinner, setIsWinner] = useState<boolean>(false);
   const [winner, setWinner] = useState<IWinnerRace>();
   const [winnerInRace, setWinnerInRace] = useState<IWinnerRace>();
@@ -49,6 +49,7 @@ const Garage: FunctionComponent = () => {
       if (winnerInRace) {
         saveWinner(winnerInRace);
       }
+      setIsResetDisabled(false);
     }
   }, [isWinner]);
 
@@ -99,6 +100,10 @@ const Garage: FunctionComponent = () => {
         selectedCar={selectedCar}
         setIsRace={setIsRace}
         setIsReset={setIsReset}
+        isRaceDisabled={isRaceDisabled}
+        isResetDisabled={isResetDisabled}
+        setIsRaceDisabled={setIsRaceDisabled}
+        setIsResetDisabled={setIsResetDisabled}
       />
       <h2 className="garage__title">Garage ({countCars})</h2>
       <h4 className="garage__page">Page # {page}</h4>
