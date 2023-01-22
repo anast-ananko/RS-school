@@ -1,6 +1,6 @@
 import { useState, FunctionComponent, useEffect } from "react";
 import React from "react";
-import { useSpring, animated } from "@react-spring/web";
+import classNames from "classnames";
 
 import { IGarageListItem } from "../../../interfaces/garageListItem";
 import { startEngine } from "../../../services/apiEngine";
@@ -24,27 +24,23 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   setIsWinner,
 }) => {
   const [time, setTime] = useState<number>(0);
-  const [isStop, setIsStop] = useState<boolean>(false);
+  const [isStopDisabled, setIsStopDisabled] = useState<boolean>(false);
+  const [isStart, setIsStart] = useState<boolean>(false);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
 
-  const nodeRef = React.useRef<HTMLDivElement>(null);
   const myRef = React.useRef<HTMLDivElement>(null);
-
-  const [animationProps, api] = useSpring(() => ({}));
-
-  const OFFSET_RIGHT = 220;
-  const CAR_WIDTH = 65;
 
   useEffect(() => {
     if (isRace) {
       setIsWinner(false);
-      setIsStop(true);
+      setIsStopDisabled(true);
       start();
     }
   }, [isRace]);
 
   useEffect(() => {
     if (isReset) {
-      setIsStop(false);
+      setIsStopDisabled(false);
       stop();
     }
   }, [isReset]);
@@ -55,38 +51,36 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   };
 
   const start = async (): Promise<void> => {
-    setIsStop(true);
+    setIsStopDisabled(true);
     const params = await startEngine(id);
     setTime(params.distance / params.velocity);
-
-    const screenWidth = window.innerWidth - OFFSET_RIGHT;
-    api.start({ transform: `translateX(${screenWidth}px)` });
+    setIsStart(true);
+    setIsPaused(false);
 
     const res = await drive(id);
     if (!res.success) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      const rect = nodeRef!.current!.getBoundingClientRect();
-      api.set({ transform: `translateX(${rect.x - CAR_WIDTH}px)` });
+      setIsPaused(true);
       stopEngine(id);
     } else {
+      stopEngine(id);
       setWinnerInRace({
         id: id,
         name: name,
         time: +(params.distance / params.velocity / 1000).toFixed(2),
       });
       setIsWinner(true);
-      stopEngine(id);
     }
   };
 
-  const stop = (): void => {
-    api.set({ transform: "translateX(0px)" });
-    setIsStop(false);
+  const stop = async () => {
+    setIsStart(false);
+    setIsStopDisabled(false);
     stopEngine(id);
+    setIsStart(false);
   };
 
   const carStyle = {
-    transitionDuration: `${time}ms`,
+    animationDuration: `${time}ms`,
   };
 
   return (
@@ -105,27 +99,27 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
           <button
             className="button__start"
             onClick={() => start()}
-            disabled={isStop ? true : false}
+            disabled={isStopDisabled ? true : false}
           >
             A
           </button>
           <button
             className="button__stop"
             onClick={() => stop()}
-            disabled={isStop ? false : true}
+            disabled={isStopDisabled ? false : true}
           >
             B
           </button>
         </div>
-        <animated.div
-          ref={nodeRef}
-          style={{
-            ...animationProps,
-            ...carStyle,
-          }}
+        <div
+          className={classNames("car__img", {
+            "car-drive": isStart,
+            paused: isPaused,
+          })}
+          style={carStyle}
         >
           <ImageCar color={color} width="95" height="45" />
-        </animated.div>
+        </div>
         <div className="ico"></div>
       </div>
     </div>

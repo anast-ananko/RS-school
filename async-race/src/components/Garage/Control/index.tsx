@@ -23,6 +23,7 @@ const Control: FunctionComponent<IControl> = ({
   isResetDisabled,
   setIsRaceDisabled,
   setIsResetDisabled,
+  setIsWinner,
 }) => {
   const color = localStorage.getItem("colorCreate");
   const colorString: string = color ? JSON.parse(color) : "#ffffff";
@@ -107,6 +108,7 @@ const Control: FunctionComponent<IControl> = ({
     setIsReset(false);
     setIsRace(true);
     setIsRaceDisabled(true);
+    setIsWinner(false);
   };
 
   const reset = (): void => {
@@ -114,6 +116,7 @@ const Control: FunctionComponent<IControl> = ({
     setIsRace(false);
     setIsRaceDisabled(false);
     setIsResetDisabled(true);
+    setIsWinner(false);
   };
 
   return (

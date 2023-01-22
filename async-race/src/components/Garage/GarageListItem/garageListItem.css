@@ -27,6 +27,7 @@
 .car__buttons {
   display: flex;
   align-items: flex-start;
+  margin-bottom: 20px;
 }
 .car__buttons > * {
   background-color: black;
@@ -51,6 +52,33 @@
   background-size: 30px 30px;
   width: 30px;
   height: 30px;
+}
+
+@keyframes drive-car {
+  0% {
+    left: 50px;
+  }
+  100% {
+    left: calc(100% - 120px);
+  }
+}
+.car-drive {
+  animation-name: drive-car;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+.stop {
+  animation-play-state: unset;
+}
+
+.car__img {
+  position: absolute;
+  left: 50px;
 }
 
 /*# sourceMappingURL=garageListItem.css.map */
