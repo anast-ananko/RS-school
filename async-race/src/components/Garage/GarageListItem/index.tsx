@@ -21,6 +21,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   isRace,
   isReset,
   setWinnerInRace,
+  isWinner,
   setIsWinner,
 }) => {
   const [time, setTime] = useState<number>(0);
@@ -40,6 +41,7 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
 
   useEffect(() => {
     if (isReset) {
+      setIsWinner(false);
       setIsStopDisabled(false);
       stop();
     }
@@ -62,13 +64,15 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
       setIsPaused(true);
       stopEngine(id);
     } else {
-      stopEngine(id);
-      setWinnerInRace({
-        id: id,
-        name: name,
-        time: +(params.distance / params.velocity / 1000).toFixed(2),
-      });
-      setIsWinner(true);
+      if (!isWinner) {
+        stopEngine(id);
+        setWinnerInRace({
+          id: id,
+          name: name,
+          time: +(params.distance / params.velocity / 1000).toFixed(2),
+        });
+        setIsWinner(true);
+      }
     }
   };
 

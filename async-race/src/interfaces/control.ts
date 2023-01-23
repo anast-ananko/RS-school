@@ -10,5 +10,4 @@ export interface IControl {
   isResetDisabled: boolean;
   setIsRaceDisabled: (n: boolean) => void;
   setIsResetDisabled: (n: boolean) => void;
-  setIsWinner: (n: boolean) => void;
 }

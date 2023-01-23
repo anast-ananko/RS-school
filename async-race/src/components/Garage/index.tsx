@@ -104,7 +104,6 @@ const Garage: FunctionComponent = () => {
         isResetDisabled={isResetDisabled}
         setIsRaceDisabled={setIsRaceDisabled}
         setIsResetDisabled={setIsResetDisabled}
-        setIsWinner={setIsWinner}
       />
       <h2 className="garage__title">Garage ({countCars})</h2>
       <h4 className="garage__page">Page # {page}</h4>
@@ -117,6 +116,7 @@ const Garage: FunctionComponent = () => {
         isRace={isRace}
         isReset={isReset}
         setWinnerInRace={setWinnerInRace}
+        isWinner={isWinner}
         setIsWinner={setIsWinner}
       />
       <div className="car__pagination">
