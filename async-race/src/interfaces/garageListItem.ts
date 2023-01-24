@@ -1,4 +1,5 @@
 import { IWinnerRace } from "./winnerRace";
+import { ISelectedCar } from "./selectedCar";
 
 export interface IGarageListItem {
   name: string;
@@ -7,7 +8,7 @@ export interface IGarageListItem {
   delCar: (id: number) => void;
   countCars: number;
   setCountCars: (id: number) => void;
-  setSelectedCar: (id: number) => void;
+  setSelectedCar: (id: ISelectedCar) => void;
   index: number;
   isRace: boolean;
   isReset: boolean;

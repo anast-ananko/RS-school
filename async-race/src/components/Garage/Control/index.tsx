@@ -2,9 +2,7 @@ import { FunctionComponent } from "react";
 import { useState, useEffect } from "react";
 
 import { createCar } from "../../../services/apiGarage";
-import { getCar } from "../../../services/apiGarage";
 import { updateCar } from "../../../services/apiGarage";
-import { ICar } from "../../../interfaces/car";
 import { IControl } from "../../../interfaces/control";
 import generateRandomName from "../../../helpers/generateRandomName";
 import generateRandomColor from "../../../helpers/generateRandomColor";
@@ -15,6 +13,7 @@ const Control: FunctionComponent<IControl> = ({
   countCars,
   setCountCars,
   selectedCar,
+  setSelectedCar,
   isUpdate,
   setIsUpdate,
   setIsRace,
@@ -35,8 +34,11 @@ const Control: FunctionComponent<IControl> = ({
   const [colorUpdate, setColorUpdate] = useState<string>("#ffffff");
 
   useEffect(() => {
-    updateSelectedCar(selectedCar);
-    localStorage.setItem("selectedCar", JSON.stringify(selectedCar));
+    if (selectedCar) {
+      setTitleUpdate(selectedCar.name);
+      setColorUpdate(selectedCar.color);
+    }
+    console.log(selectedCar);
   }, [selectedCar]);
 
   useEffect(() => {
@@ -44,17 +46,9 @@ const Control: FunctionComponent<IControl> = ({
     localStorage.setItem("titleCreate", JSON.stringify(titleCreate));
   }, [titleCreate, colorCreate]);
 
-  const updateSelectedCar = async (id: number | undefined): Promise<void> => {
-    if (typeof id === "number") {
-      const car = await getCar(id);
-      onCarLoaded(car);
-    }
-  };
-
-  const onCarLoaded = (car: ICar): void => {
-    setTitleUpdate(car.name);
-    setColorUpdate(car.color);
-  };
+  useEffect(() => {
+    localStorage.setItem("selectedCar", JSON.stringify({...selectedCar, name: titleUpdate, color: colorUpdate}));
+  }, [titleUpdate, colorUpdate]);  
 
   const createNewCar = (): void => {
     if (titleCreate && colorCreate) {
@@ -67,18 +61,24 @@ const Control: FunctionComponent<IControl> = ({
     localStorage.removeItem("titleCreate");
   };
 
-  const updCar = (): void => {
-    if (typeof selectedCar === "number") {
-      updateCar(selectedCar, {
+  const updCar = (): void => { 
+    if (selectedCar) {
+      updateCar(selectedCar.id, {
         name: titleUpdate,
         color: colorUpdate,
       });
-    }
+    }    
+
     setIsUpdate(!isUpdate);
     setTitleUpdate("");
-    setColorUpdate("#000000");
-    localStorage.removeItem("selectedCar");
+    setColorUpdate("#000000");  
+    setSelectedCar(null); 
+    console.log(selectedCar);
   };
+
+  useEffect(() => {
+    localStorage.removeItem("selectedCar"); 
+  }, [isUpdate]);
 
   const generateRandomCars = (): void => {
     for (let i = 0; i < 100; i++) {
@@ -100,7 +100,7 @@ const Control: FunctionComponent<IControl> = ({
   };
 
   const colorUpdateHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setColorUpdate(e.target.value);
+    setColorUpdate(e.target.value);    
   };
 
   const race = (): void => {
