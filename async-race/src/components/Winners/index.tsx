@@ -2,22 +2,20 @@ import { useState, useEffect, FunctionComponent } from "react";
 
 import ImageCar from "../ImageCar";
 import { IWinner } from "../../interfaces/winner";
+import { IWinners } from "../../interfaces/winners";
 import { ITableWinner } from "../../interfaces/tableWinner";
 import { getCar } from "../../services/apiGarage";
 import { getWinners } from "../../services/apiWinners";
 
 import "./winners.scss";
 
-const Winners: FunctionComponent = () => {
-  const pageWinners = localStorage.getItem("pageWinners");
-  const pageNumber: number = pageWinners ? JSON.parse(pageWinners) : 1;
+const Winners: FunctionComponent<IWinners> = ({ pageWinners, setPageWinners }) => {
   const orderWinners = localStorage.getItem("orderWinners");
   const orderString: string = orderWinners ? JSON.parse(orderWinners) : "ASC";
   const sortWinners = localStorage.getItem("sortWinners");
   const sortString: string = sortWinners ? JSON.parse(sortWinners) : "id";
 
   const [countWinners, setCountWinners] = useState<number>(0);
-  const [page, setPage] = useState<number>(pageNumber);
   const [winnersList, setWinnersList] = useState<IWinner[]>([]);
   const [carsList, setCarsList] = useState<ITableWinner[]>([]);
   const [sort, setSort] = useState<string>(sortString);
@@ -29,11 +27,17 @@ const Winners: FunctionComponent = () => {
   const LIMIT_FOR_PAGE = 10;
 
   useEffect(() => {
-    updateWinners(page, sort, order);
-    localStorage.setItem("pageWinners", JSON.stringify(page));
+    const pageWin = localStorage.getItem("pageWinners");
+    const pageNumber: number = pageWin? JSON.parse(pageWin) : 1;
+    setPageWinners(pageNumber);
+  }, []);
+
+  useEffect(() => {
+    updateWinners(pageWinners, sort, order);
+    localStorage.setItem("pageWinners", JSON.stringify(pageWinners));
     localStorage.setItem("orderWinners", JSON.stringify(order));
     localStorage.setItem("sortWinners", JSON.stringify(sort));
-  }, [page, sort, order]);
+  }, [pageWinners, sort, order]);
 
   useEffect(() => {
     createCarsList();
@@ -70,13 +74,13 @@ const Winners: FunctionComponent = () => {
   };
 
   const prevPage = (): void => {
-    if (page > MIN_PAGE) {
-      setPage(page - 1);
+    if (pageWinners > MIN_PAGE) {
+      setPageWinners(pageWinners - 1);
     }
   };
 
   const nextPage = (): void => {
-    if (page < MAX_PAGE) setPage(page + 1);
+    if (pageWinners < MAX_PAGE) setPageWinners(pageWinners + 1);
   };
 
   const hadlerButtonWins = (): void => {
@@ -92,7 +96,7 @@ const Winners: FunctionComponent = () => {
   return (
     <div className="winners">
       <h2 className="winners__title">Winners ({countWinners})</h2>
-      <h4 className="winners__page">Page # {page}</h4>
+      <h4 className="winners__page">Page # {pageWinners}</h4>
       <table>
         <tbody>
           <tr>
@@ -119,7 +123,7 @@ const Winners: FunctionComponent = () => {
           {carsList.map((item) => {
             return (
               <tr key={item.i}>
-                <th>{item.i + 1 + LIMIT_FOR_PAGE * (page - 1)}</th>
+                <th>{item.i + 1 + LIMIT_FOR_PAGE * (pageWinners - 1)}</th>
                 <th>
                   <ImageCar color={item.color} width="65" height="35" />
                 </th>
@@ -135,14 +139,14 @@ const Winners: FunctionComponent = () => {
         <button
           className="button__prev"
           onClick={() => prevPage()}
-          disabled={page === MIN_PAGE ? true : false}
+          disabled={pageWinners === MIN_PAGE ? true : false}
         >
           Prev
         </button>
         <button
           className="button__next"
           onClick={() => nextPage()}
-          disabled={page === MAX_PAGE ? true : false}
+          disabled={pageWinners === MAX_PAGE ? true : false}
         >
           Next
         </button>

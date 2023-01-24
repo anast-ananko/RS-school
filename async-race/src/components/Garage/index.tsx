@@ -2,6 +2,7 @@ import { useState, useEffect, FunctionComponent } from "react";
 
 import Modal from "../Modal";
 import { IWinnerRace } from "../../interfaces/winnerRace";
+import { IGarage } from "../../interfaces/garage";
 import Control from "./Control";
 import GarageList from "./GarageList";
 import { getCars } from "../../services/apiGarage";
@@ -12,9 +13,7 @@ import { deleteWinner } from "../../services/apiWinners";
 
 import "./garage.scss";
 
-const Garage: FunctionComponent = () => {
-  const pageGarage = localStorage.getItem("pageGarage");
-  const pageNumber: number = pageGarage ? JSON.parse(pageGarage) : 1;
+const Garage: FunctionComponent<IGarage> = ({ pageGarage, setPageGarage }) => {
   const selCar = localStorage.getItem("selectedCar");
   let selCarNumber = null;
   if (selCar) {
@@ -22,7 +21,6 @@ const Garage: FunctionComponent = () => {
   }
 
   const [countCars, setCountCars] = useState<number>(0);
-  const [page, setPage] = useState<number>(pageNumber);
   const [garageList, setGarageList] = useState<ICar[]>([]);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
   const [selectedCar, setSelectedCar] = useState<number>(selCarNumber);
@@ -39,8 +37,14 @@ const Garage: FunctionComponent = () => {
   const MIN_PAGE = 1;
 
   useEffect(() => {
-    updateGarage(page);
-  }, [countCars, isUpdate, page]);
+    const pageGar = localStorage.getItem("pageGarage");
+    const pageNumber: number = pageGar ? JSON.parse(pageGar) : 1;
+    setPageGarage(pageNumber);
+  }, []);
+
+  useEffect(() => {
+    updateGarage(pageGarage);
+  }, [countCars, isUpdate, pageGarage]);
 
   useEffect(() => {
     if (isWinner && isRace) {
@@ -54,8 +58,8 @@ const Garage: FunctionComponent = () => {
   }, [isWinner]);
 
   useEffect(() => {
-    localStorage.setItem("pageGarage", JSON.stringify(page));
-  }, [page]);
+    localStorage.setItem("pageGarage", JSON.stringify(pageGarage));
+  }, [pageGarage]);
 
   const updateGarage = async (page: number): Promise<void> => {
     const { cars, count } = await getCars(page);
@@ -78,8 +82,8 @@ const Garage: FunctionComponent = () => {
     setIsRace(false);
     setIsReset(false);
     setIsWinner(false);
-    if (page > MIN_PAGE) {
-      setPage(page - 1);
+    if (pageGarage > MIN_PAGE) {
+      setPageGarage(pageGarage - 1);
     }
   };
 
@@ -87,7 +91,7 @@ const Garage: FunctionComponent = () => {
     setIsRace(false);
     setIsReset(false);
     setIsWinner(false);
-    if (page < MAX_PAGE) setPage(page + 1);
+    if (pageGarage < MAX_PAGE) setPageGarage(pageGarage + 1);
   };
 
   return (
@@ -106,7 +110,7 @@ const Garage: FunctionComponent = () => {
         setIsResetDisabled={setIsResetDisabled}
       />
       <h2 className="garage__title">Garage ({countCars})</h2>
-      <h4 className="garage__page">Page # {page}</h4>
+      <h4 className="garage__page">Page # {pageGarage}</h4>
       <GarageList
         garageList={garageList}
         delCar={delCar}
@@ -123,14 +127,14 @@ const Garage: FunctionComponent = () => {
         <button
           className="button__prev"
           onClick={() => prevPage()}
-          disabled={page === MIN_PAGE ? true : false}
+          disabled={pageGarage === MIN_PAGE ? true : false}
         >
           Prev
         </button>
         <button
           className="button__next"
           onClick={() => nextPage()}
-          disabled={page === MAX_PAGE ? true : false}
+          disabled={pageGarage === MAX_PAGE ? true : false}
         >
           Next
         </button>
