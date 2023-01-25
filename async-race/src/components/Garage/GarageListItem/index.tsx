@@ -77,9 +77,8 @@ const GarageListItem: FunctionComponent<IGarageListItem> = ({
   };
 
   const stop = async () => {
-    setIsStart(false);
     setIsStopDisabled(false);
-    stopEngine(id);
+    await stopEngine(id);
     setIsStart(false);
   };
 
