@@ -9,7 +9,10 @@ import { getWinners } from "../../services/apiWinners";
 
 import "./winners.scss";
 
-const Winners: FunctionComponent<IWinners> = ({ pageWinners, setPageWinners }) => {
+const Winners: FunctionComponent<IWinners> = ({
+  pageWinners,
+  setPageWinners,
+}) => {
   const orderWinners = localStorage.getItem("orderWinners");
   const orderString: string = orderWinners ? JSON.parse(orderWinners) : "ASC";
   const sortWinners = localStorage.getItem("sortWinners");
@@ -28,7 +31,7 @@ const Winners: FunctionComponent<IWinners> = ({ pageWinners, setPageWinners }) =
 
   useEffect(() => {
     const pageWin = localStorage.getItem("pageWinners");
-    const pageNumber: number = pageWin? JSON.parse(pageWin) : 1;
+    const pageNumber: number = pageWin ? JSON.parse(pageWin) : 1;
     setPageWinners(pageNumber);
   }, []);
 

@@ -20,8 +20,21 @@ const App: FunctionComponent = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Garage pageGarage={pageGarage} setPageGarage={setPageGarage} />} />
-        <Route path="/winners" element={<Winners pageWinners={pageWinners} setPageWinners={setPageWinners} />} />
+        <Route
+          path="/"
+          element={
+            <Garage pageGarage={pageGarage} setPageGarage={setPageGarage} />
+          }
+        />
+        <Route
+          path="/winners"
+          element={
+            <Winners
+              pageWinners={pageWinners}
+              setPageWinners={setPageWinners}
+            />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

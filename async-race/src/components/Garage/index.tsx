@@ -24,7 +24,9 @@ const Garage: FunctionComponent<IGarage> = ({ pageGarage, setPageGarage }) => {
   const [countCars, setCountCars] = useState<number>(0);
   const [garageList, setGarageList] = useState<ICar[]>([]);
   const [isUpdate, setIsUpdate] = useState<boolean>(false);
-  const [selectedCar, setSelectedCar] = useState<ISelectedCar | null>(selCarNumber);
+  const [selectedCar, setSelectedCar] = useState<ISelectedCar | null>(
+    selCarNumber
+  );
   const [isRace, setIsRace] = useState<boolean>(false);
   const [isReset, setIsReset] = useState<boolean>(false);
   const [isRaceDisabled, setIsRaceDisabled] = useState<boolean>(false);

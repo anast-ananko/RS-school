@@ -46,8 +46,11 @@ const Control: FunctionComponent<IControl> = ({
   }, [titleCreate, colorCreate]);
 
   useEffect(() => {
-    localStorage.setItem("selectedCar", JSON.stringify({...selectedCar, name: titleUpdate, color: colorUpdate}));
-  }, [titleUpdate, colorUpdate]);  
+    localStorage.setItem(
+      "selectedCar",
+      JSON.stringify({ ...selectedCar, name: titleUpdate, color: colorUpdate })
+    );
+  }, [titleUpdate, colorUpdate]);
 
   const createNewCar = (): void => {
     if (titleCreate && colorCreate) {
@@ -60,22 +63,22 @@ const Control: FunctionComponent<IControl> = ({
     localStorage.removeItem("titleCreate");
   };
 
-  const updCar = (): void => { 
+  const updCar = (): void => {
     if (selectedCar) {
       updateCar(selectedCar.id, {
         name: titleUpdate,
         color: colorUpdate,
       });
-    }    
+    }
 
     setIsUpdate(!isUpdate);
     setTitleUpdate("");
-    setColorUpdate("#000000");  
-    setSelectedCar(null); 
+    setColorUpdate("#000000");
+    setSelectedCar(null);
   };
 
   useEffect(() => {
-    localStorage.removeItem("selectedCar"); 
+    localStorage.removeItem("selectedCar");
   }, [isUpdate]);
 
   const generateRandomCars = (): void => {
@@ -98,7 +101,7 @@ const Control: FunctionComponent<IControl> = ({
   };
 
   const colorUpdateHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setColorUpdate(e.target.value);    
+    setColorUpdate(e.target.value);
   };
 
   const race = (): void => {
