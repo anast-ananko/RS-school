@@ -38,7 +38,6 @@ const Control: FunctionComponent<IControl> = ({
       setTitleUpdate(selectedCar.name);
       setColorUpdate(selectedCar.color);
     }
-    console.log(selectedCar);
   }, [selectedCar]);
 
   useEffect(() => {
